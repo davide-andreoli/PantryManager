@@ -19,4 +19,5 @@ Here is what I'm planning to implement:
 - iCloud Sync
 - Food categories
 - Customize or add containers --> not designed for this from the start
+### Known issues
 

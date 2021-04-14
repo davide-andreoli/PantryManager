@@ -11,7 +11,7 @@ import Combine
 struct AddItemView: View {
     
     @State private var itemName: String = ""
-    @State private var itemQuantity: String = "1"
+    @State private var itemQuantity: Int = 1
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var pantryViewModel: PantryManagerViewModel
     
@@ -22,23 +22,9 @@ struct AddItemView: View {
                     TextField("Item name", text: $itemName)
                 }
                 Section(header: Text("Quantity")) {
-//                    MARK - TO DO: Prevent Stepper from going to zero
-                    Stepper(onIncrement: {
-                        itemQuantity = String(Int(itemQuantity)! + 1)
-                        print("Increment: \(itemQuantity)")
-                    }, onDecrement: {
-                            itemQuantity = String(Int(itemQuantity)! - 1)
-                    }) {
-                        TextField("Item quantity", text: $itemQuantity)
+                    Stepper(value: $itemQuantity, in: 1...Int.max) {
+                        TextField("Item quantity", value: $itemQuantity, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
-                            .onReceive(Just(itemQuantity)) { newValue in
-                                let filteredValue = newValue.filter {
-                                    "0123456789".contains($0)
-                                }
-                                if filteredValue != newValue {
-                                    itemQuantity = filteredValue
-                                }
-                            }
                     }
                 }
             }
