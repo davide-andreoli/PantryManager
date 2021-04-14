@@ -16,7 +16,7 @@ struct ItemView: View {
                 Text(item.name)
             }
             Section(header: Text("Quantity")) {
-                Text("\(item.quantity)")
+                Text("\(item.quantity) \(item.quantityType.rawValue)")
             }
             
         }
@@ -26,7 +26,7 @@ struct ItemView: View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let prova1 = FoodItem(name: "Uova", quantity: 3, quantityType: .unit, expiryDate: Date())
-        ItemView(item: prova1)
+        let sampleData = FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
+        ItemView(item: sampleData)
     }
 }

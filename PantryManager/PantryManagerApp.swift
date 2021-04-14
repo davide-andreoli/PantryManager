@@ -16,15 +16,15 @@ struct PantryManagerApp: App {
             TabView {
                 PantryView(pantryViewModel: viewModel)
                     .tabItem {
-                        Text("Label1")     
+                        Label("Pantry", systemImage: "archivebox")
                     }.tag(1)
                 Text("Tab Content 1")
                     .tabItem {
-                        Text("Label1")
+                        Label("Fridge", systemImage: "dial.min")
                     }.tag(2)
                 Text("Tab Content 2")
                     .tabItem {
-                        Text("Label 2")
+                        Label("Freezer", systemImage: "snow")
                     }.tag(3)
             }
         }

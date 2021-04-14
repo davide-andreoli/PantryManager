@@ -13,10 +13,13 @@ struct PantryManager {
     var freezerItems: [FoodItem]
     
     init() {
-        let prova1 = FoodItem(name: "Uova", quantity: 3, quantityType: .unit, expiryDate: Date())
+        let sampleData = [
+            FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date()),
+            FoodItem(name: "Milk", quantity: 3, quantityType: .bottles, expiryDate: Date()),
+        ]
         
-        pantryItems = [prova1]
-        fridgeItems = [prova1]
-        freezerItems = [prova1]
+        pantryItems = sampleData
+        fridgeItems = sampleData
+        freezerItems = sampleData
     }
 }

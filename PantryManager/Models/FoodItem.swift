@@ -15,8 +15,8 @@ struct FoodItem: Identifiable {
     var id: UUID = UUID()
     
     enum QuantityType: String {
-        case unit = "Unit"
-        case bottles = "Bottles"
+        case unit = "units"
+        case bottles = "bottles"
     }
     
     enum StorageType: String {
