@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B6A2626C5B1003A9656 /* PantryManager.swift */; };
+		954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */; };
+		954B7B722626CCDE003A9656 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B712626CCDE003A9656 /* ItemView.swift */; };
 		95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9926261DE300F7DABC /* PantryManagerApp.swift */; };
-		95725D9C26261DE300F7DABC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9B26261DE300F7DABC /* ContentView.swift */; };
+		95725D9C26261DE300F7DABC /* PantryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9B26261DE300F7DABC /* PantryView.swift */; };
 		95725D9E26261DE500F7DABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725D9D26261DE500F7DABC /* Assets.xcassets */; };
 		95725DA126261DE500F7DABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725DA026261DE500F7DABC /* Preview Assets.xcassets */; };
+		95725DAC262620C000F7DABC /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* FoodItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		954B7B6A2626C5B1003A9656 /* PantryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManager.swift; sourceTree = "<group>"; };
+		954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerViewModel.swift; sourceTree = "<group>"; };
+		954B7B712626CCDE003A9656 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		95725D9626261DE300F7DABC /* PantryManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PantryManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95725D9926261DE300F7DABC /* PantryManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerApp.swift; sourceTree = "<group>"; };
-		95725D9B26261DE300F7DABC /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		95725D9B26261DE300F7DABC /* PantryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryView.swift; sourceTree = "<group>"; };
 		95725D9D26261DE500F7DABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95725DA026261DE500F7DABC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		95725DA226261DE500F7DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		95725DAB262620C000F7DABC /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		954B7B5F2626C1F2003A9656 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		954B7B672626C314003A9656 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				95725D9B26261DE300F7DABC /* PantryView.swift */,
+				954B7B712626CCDE003A9656 /* ItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		954B7B692626C4D0003A9656 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		95725D8D26261DE300F7DABC = {
 			isa = PBXGroup;
 			children = (
@@ -52,8 +84,11 @@
 		95725D9826261DE300F7DABC /* PantryManager */ = {
 			isa = PBXGroup;
 			children = (
+				954B7B692626C4D0003A9656 /* ViewModels */,
+				954B7B5F2626C1F2003A9656 /* Enums */,
+				95725DA92626208200F7DABC /* Models */,
 				95725D9926261DE300F7DABC /* PantryManagerApp.swift */,
-				95725D9B26261DE300F7DABC /* ContentView.swift */,
+				954B7B672626C314003A9656 /* Views */,
 				95725D9D26261DE500F7DABC /* Assets.xcassets */,
 				95725DA226261DE500F7DABC /* Info.plist */,
 				95725D9F26261DE500F7DABC /* Preview Content */,
@@ -67,6 +102,15 @@
 				95725DA026261DE500F7DABC /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		95725DA92626208200F7DABC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				95725DAB262620C000F7DABC /* FoodItem.swift */,
+				954B7B6A2626C5B1003A9656 /* PantryManager.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,8 +182,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95725D9C26261DE300F7DABC /* ContentView.swift in Sources */,
+				954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */,
+				954B7B722626CCDE003A9656 /* ItemView.swift in Sources */,
+				95725D9C26261DE300F7DABC /* PantryView.swift in Sources */,
+				95725DAC262620C000F7DABC /* FoodItem.swift in Sources */,
 				95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */,
+				954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
