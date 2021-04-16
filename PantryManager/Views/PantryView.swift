@@ -12,12 +12,18 @@ struct PantryView: View {
     @ObservedObject var pantryViewModel: PantryManagerViewModel
     @State private var showingAddItemView: Bool = false
     
+    
     var body: some View {
         NavigationView {
-            List(pantryViewModel.pantryItmes) { item in
-                NavigationLink(destination: ItemView(item: item)) {
-                    Text(item.name)
+            List {
+                ForEach(pantryViewModel.pantryItmes) { item in
+                    NavigationLink(destination: ItemView(item: item)) {
+                        Text(item.name)
+                    }
                 }
+                .onDelete(perform: { 
+                    pantryViewModel.delete(at: $0, from: "Pantry")
+                })
             }
                 .padding()
                 .navigationTitle("Pantry")
@@ -33,7 +39,7 @@ struct PantryView: View {
 
         }
         .sheet(isPresented: $showingAddItemView) {
-            AddItemView(pantryViewModel: pantryViewModel)
+            AddItemView(viewModel: pantryViewModel)
         }
     }
 }

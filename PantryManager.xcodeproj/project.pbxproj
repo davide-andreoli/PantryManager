@@ -10,18 +10,23 @@
 		954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B6A2626C5B1003A9656 /* PantryManager.swift */; };
 		954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */; };
 		954B7B722626CCDE003A9656 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B712626CCDE003A9656 /* ItemView.swift */; };
+		95544F962628CA7200529DF3 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95544F952628CA7200529DF3 /* ItemListView.swift */; };
+		95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95544F982628D36F00529DF3 /* StoragesListView.swift */; };
 		95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9926261DE300F7DABC /* PantryManagerApp.swift */; };
 		95725D9C26261DE300F7DABC /* PantryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9B26261DE300F7DABC /* PantryView.swift */; };
 		95725D9E26261DE500F7DABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725D9D26261DE500F7DABC /* Assets.xcassets */; };
 		95725DA126261DE500F7DABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725DA026261DE500F7DABC /* Preview Assets.xcassets */; };
 		95725DAC262620C000F7DABC /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* FoodItem.swift */; };
 		95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A742626EBCA00EF954B /* AddItemView.swift */; };
+		95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A7D2627410600EF954B /* EditItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		954B7B6A2626C5B1003A9656 /* PantryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManager.swift; sourceTree = "<group>"; };
 		954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerViewModel.swift; sourceTree = "<group>"; };
 		954B7B712626CCDE003A9656 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		95544F952628CA7200529DF3 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		95544F982628D36F00529DF3 /* StoragesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragesListView.swift; sourceTree = "<group>"; };
 		95725D9626261DE300F7DABC /* PantryManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PantryManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95725D9926261DE300F7DABC /* PantryManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerApp.swift; sourceTree = "<group>"; };
 		95725D9B26261DE300F7DABC /* PantryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryView.swift; sourceTree = "<group>"; };
@@ -31,6 +36,7 @@
 		95725DAB262620C000F7DABC /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		95CF6A742626EBCA00EF954B /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		95CF6A772627082200EF954B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		95CF6A7D2627410600EF954B /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,9 @@
 				95725D9B26261DE300F7DABC /* PantryView.swift */,
 				95CF6A742626EBCA00EF954B /* AddItemView.swift */,
 				954B7B712626CCDE003A9656 /* ItemView.swift */,
+				95CF6A7D2627410600EF954B /* EditItemView.swift */,
+				95544F952628CA7200529DF3 /* ItemListView.swift */,
+				95544F982628D36F00529DF3 /* StoragesListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -191,7 +200,10 @@
 				954B7B722626CCDE003A9656 /* ItemView.swift in Sources */,
 				95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */,
 				95725D9C26261DE300F7DABC /* PantryView.swift in Sources */,
+				95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */,
+				95544F962628CA7200529DF3 /* ItemListView.swift in Sources */,
 				95725DAC262620C000F7DABC /* FoodItem.swift in Sources */,
+				95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */,
 				95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */,
 				954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */,
 			);

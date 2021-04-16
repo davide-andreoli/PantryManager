@@ -14,11 +14,11 @@ struct PantryManagerApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                PantryView(pantryViewModel: viewModel)
+                StoragesListView(viewModel: viewModel)
                     .tabItem {
                         Label("Pantry", systemImage: "archivebox")
                     }.tag(1)
-                Text("Tab Content 1")
+                StoragesListView(viewModel: viewModel)
                     .tabItem {
                         Label("Fridge", systemImage: "dial.min")
                     }.tag(2)

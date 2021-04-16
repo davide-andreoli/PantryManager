@@ -10,22 +10,38 @@ import Combine
 
 struct AddItemView: View {
     
-    @State private var itemName: String = ""
-    @State private var itemQuantity: Int = 1
+    @State private var item: FoodItem = FoodItem(name: "", quantity: 1, quantityType: .unit, expiryDate: Date())
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var pantryViewModel: PantryManagerViewModel
+    @ObservedObject var viewModel: PantryManagerViewModel
+    
+//    MARK: UI/UX - Is it better to delete the sections?
+    
+//    MARK: TO DO - Detect where the view is being called and set that as the default place
     
     var body: some View {
         NavigationView {
             Form {
+                Section(header: Text("Place")) {
+
+                    Picker(selection: $item.storage, label: Text("Hey")) {
+                        ForEach(viewModel.storages, id:\.self) { storage in
+                            Text(storage)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
                 Section(header: Text("Name")) {
-                    TextField("Item name", text: $itemName)
+                    TextField("Item name", text: $item.name)
                 }
                 Section(header: Text("Quantity")) {
-                    Stepper(value: $itemQuantity, in: 1...Int.max) {
-                        TextField("Item quantity", value: $itemQuantity, formatter: NumberFormatter())
+                    Stepper(value: $item.quantity, in: 1...Int.max) {
+                        TextField("Item quantity", value: $item.quantity, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
                     }
+                }
+                Section(header: Text("Expiry Date")) {
+                    DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: [.date])
+                    
                 }
             }
             .navigationTitle("Add Item")
@@ -33,7 +49,8 @@ struct AddItemView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        
+                        viewModel.add(item)
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Add")
                     }
@@ -52,6 +69,6 @@ struct AddItemView: View {
 
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView(pantryViewModel: PantryManagerViewModel())
+        AddItemView(viewModel: PantryManagerViewModel())
     }
 }

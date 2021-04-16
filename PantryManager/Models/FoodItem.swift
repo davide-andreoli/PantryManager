@@ -8,10 +8,17 @@
 import Foundation
 
 struct FoodItem: Identifiable {
+    // Name of the item
     var name: String
+    // Quantity
     var quantity: Int
+    // TDB
     var quantityType: QuantityType
+    // Location of the item
+    var storage: String = "Pantry"
+    // Expiry Date
     var expiryDate: Date
+    // ID
     var id: UUID = UUID()
     
     enum QuantityType: String {
@@ -19,9 +26,4 @@ struct FoodItem: Identifiable {
         case bottles = "bottles"
     }
     
-    enum StorageType: String {
-        case pantry = "Pantry"
-        case fridge = "Fridge"
-        case freezer = "Freezer"
-    }
 }

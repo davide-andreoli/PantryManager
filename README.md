@@ -18,6 +18,6 @@ Here is what I'm planning to implement:
 - Data persistency --> this should be a given, but I'd like to implement the basic functionalities first and then focus on persistence
 - iCloud Sync
 - Food categories
-- Customize or add containers --> not designed for this from the start
+- Customize or add containers
 ### Known issues
-
+- Navigation title not apearing in all storage views
