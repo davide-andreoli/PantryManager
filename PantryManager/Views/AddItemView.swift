@@ -10,6 +10,7 @@ import Combine
 
 struct AddItemView: View {
     
+    @State var itemStorage: String
     @State private var item: FoodItem = FoodItem(name: "", quantity: 1, quantityType: .unit, expiryDate: Date())
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: PantryManagerViewModel
@@ -21,14 +22,16 @@ struct AddItemView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Place")) {
+                Section(header: Text("Storage")) {
 
-                    Picker(selection: $item.storage, label: Text("Hey")) {
+                    Picker(selection: $item.storage, label: Text("Storage")) {
                         ForEach(viewModel.storages, id:\.self) { storage in
                             Text(storage)
                         }
                     }
-                    .pickerStyle(SegmentedPickerStyle())
+                }
+                .onAppear {
+                    item.storage = itemStorage
                 }
                 Section(header: Text("Name")) {
                     TextField("Item name", text: $item.name)
@@ -69,6 +72,6 @@ struct AddItemView: View {
 
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView(viewModel: PantryManagerViewModel())
+        AddItemView(itemStorage: "Pantry", viewModel: PantryManagerViewModel())
     }
 }

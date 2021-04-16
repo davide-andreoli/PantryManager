@@ -20,4 +20,4 @@ Here is what I'm planning to implement:
 - Food categories
 - Customize or add containers
 ### Known issues
-- Navigation title not apearing in all storage views
+

@@ -15,37 +15,32 @@ struct ItemListView: View {
     var body: some View {
             List {
                 ForEach(viewModel.items.filter { $0.storage == itemsStorage }) { item in
-                        NavigationLink(destination: ItemView(item: item)) {
+                        NavigationLink(destination: ItemView(item: item, viewModel: viewModel)) {
                             Text(item.name)
                         }
                 }
                 .onDelete(perform: {
                     viewModel.delete(at: $0, from: itemsStorage)
                 })
+            }
+                .sheet(isPresented: $showingAddItemView) {
+                    AddItemView(itemStorage: itemsStorage, viewModel: viewModel)
+                }
                 .navigationTitle(itemsStorage)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        showingAddItemView.toggle()
-                    }) {
-                        Image(systemName: "plus")
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            showingAddItemView.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
-            }
-
-        }
-        .sheet(isPresented: $showingAddItemView) {
-            AddItemView(viewModel: viewModel)
-        }
     }
 }
 
 struct ItemListView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData = [
-            FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date()),
-            FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
-        ]
         ItemListView(itemsStorage: "Pantry" ,viewModel: PantryManagerViewModel())
     }
 }

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ItemView: View {
     @State var item: FoodItem
+    @ObservedObject var viewModel: PantryManagerViewModel
+    @Environment(\.presentationMode) var presentationMode
     let expiryDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .short
@@ -28,6 +30,13 @@ struct ItemView: View {
                 }
                 Section(header: Text("Expiry Date")) {
                     Text("\(item.expiryDate, formatter: expiryDateFormatter)")
+                }
+                Section {
+                    Button(action: {deleteItem(item: item)}) {
+                        Text("Delete item")
+                    }
+                    .foregroundColor(.red)
+                    
                 }
                 
             }
@@ -59,11 +68,16 @@ struct ItemView: View {
 
         
     }
+    
+    func deleteItem(item: FoodItem) {
+        viewModel.delete(item)
+        presentationMode.wrappedValue.dismiss()
+    }
 }
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
         let sampleData = FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
-        ItemView(item: sampleData)
+        ItemView(item: sampleData, viewModel: PantryManagerViewModel())
     }
 }

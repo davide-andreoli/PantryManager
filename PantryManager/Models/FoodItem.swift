@@ -12,7 +12,7 @@ struct FoodItem: Identifiable {
     var name: String
     // Quantity
     var quantity: Int
-    // TDB
+    // TDB - Still to be implemented and used
     var quantityType: QuantityType
     // Location of the item
     var storage: String = "Pantry"
