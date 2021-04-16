@@ -12,10 +12,12 @@
 		954B7B722626CCDE003A9656 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B712626CCDE003A9656 /* ItemView.swift */; };
 		95544F962628CA7200529DF3 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95544F952628CA7200529DF3 /* ItemListView.swift */; };
 		95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95544F982628D36F00529DF3 /* StoragesListView.swift */; };
+		95544FF0262997ED00529DF3 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95544FEF262997ED00529DF3 /* Persistence.swift */; };
 		95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9926261DE300F7DABC /* PantryManagerApp.swift */; };
 		95725D9E26261DE500F7DABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725D9D26261DE500F7DABC /* Assets.xcassets */; };
 		95725DA126261DE500F7DABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725DA026261DE500F7DABC /* Preview Assets.xcassets */; };
 		95725DAC262620C000F7DABC /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* FoodItem.swift */; };
+		9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */; };
 		95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A742626EBCA00EF954B /* AddItemView.swift */; };
 		95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A7D2627410600EF954B /* EditItemView.swift */; };
 /* End PBXBuildFile section */
@@ -26,6 +28,8 @@
 		954B7B712626CCDE003A9656 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
 		95544F952628CA7200529DF3 /* ItemListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 		95544F982628D36F00529DF3 /* StoragesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoragesListView.swift; sourceTree = "<group>"; };
+		95544FEB2629975A00529DF3 /* PantryManager.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PantryManager.xcdatamodel; sourceTree = "<group>"; };
+		95544FEF262997ED00529DF3 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		95725D9626261DE300F7DABC /* PantryManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PantryManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95725D9926261DE300F7DABC /* PantryManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerApp.swift; sourceTree = "<group>"; };
 		95725D9D26261DE500F7DABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -79,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				95CF6A772627082200EF954B /* README.md */,
+				95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */,
 				95725D9826261DE300F7DABC /* PantryManager */,
 				95725D9726261DE300F7DABC /* Products */,
 			);
@@ -103,6 +108,7 @@
 				95725D9D26261DE500F7DABC /* Assets.xcassets */,
 				95725DA226261DE500F7DABC /* Info.plist */,
 				95725D9F26261DE500F7DABC /* Preview Content */,
+				95544FEF262997ED00529DF3 /* Persistence.swift */,
 			);
 			path = PantryManager;
 			sourceTree = "<group>";
@@ -193,7 +199,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95544FF0262997ED00529DF3 /* Persistence.swift in Sources */,
 				954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */,
+				9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */,
 				954B7B722626CCDE003A9656 /* ItemView.swift in Sources */,
 				95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */,
 				95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */,
@@ -390,6 +398,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				95544FEB2629975A00529DF3 /* PantryManager.xcdatamodel */,
+			);
+			currentVersion = 95544FEB2629975A00529DF3 /* PantryManager.xcdatamodel */;
+			path = PantryManager.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 95725D8E26261DE300F7DABC /* Project object */;
 }

@@ -26,7 +26,7 @@ struct ItemView: View {
                     Text(item.name)
                 }
                 Section(header: Text("Quantity")) {
-                    Text("\(item.quantity) \(item.quantityType.rawValue)")
+                    Text(item.quantity == 1 ? "\(item.quantity) unit" : "\(item.quantity) units")
                 }
                 Section(header: Text("Expiry Date")) {
                     Text("\(item.expiryDate, formatter: expiryDateFormatter)")

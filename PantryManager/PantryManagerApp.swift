@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct PantryManagerApp: App {
     let viewModel = PantryManagerViewModel()
+    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
