@@ -11,11 +11,10 @@ The main objectives is to assist when grocery shopping, so that you know exactly
 - Save money
 ### Features
 Here are the features already implemented:
-- Still building
+- List what is in your pantry, fridge, freezer and add, remove or modify items
 ### Planned features
 Here is what I'm planning to implement:
-- List what is in your pantry, fridge, freezer and add, remove or modify items
-- Data persistency --> this should be a given, but I'd like to implement the basic functionalities first and then focus on persistence
+- Data persistency --> this should be a given, but I prefered to build the basic functionalities first and then focus on persistence
 - iCloud Sync
 - Food categories
 - Customize or add containers

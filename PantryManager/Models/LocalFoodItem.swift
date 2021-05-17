@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FoodItem: Identifiable {
+struct LocalFoodItem: Identifiable {
     // Name of the item
     var name: String
     // Quantity

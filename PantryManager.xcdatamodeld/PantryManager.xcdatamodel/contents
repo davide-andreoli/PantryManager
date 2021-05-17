@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName=".Item" syncable="YES" codeGenerationType="class">
-        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FoodItem" representedClassName=".FoodItem" syncable="YES" codeGenerationType="class">
+        <attribute name="expiryDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <attribute name="prova" optional="YES" attributeType="String"/>
+        <attribute name="quantity" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
+        <relationship name="storage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodStorage" inverseName="items_" inverseEntity="FoodStorage"/>
+    </entity>
+    <entity name="FoodStorage" representedClassName="FoodStorage" syncable="YES" codeGenerationType="class">
+        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name_" optional="YES" attributeType="String"/>
+        <relationship name="items_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItem" inverseName="storage" inverseEntity="FoodItem"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-45" positionY="0" width="128" height="44"/>
+        <element name="FoodItem" positionX="2720.9013671875" positionY="2561.536682128906" width="128" height="119"/>
+        <element name="FoodStorage" positionX="2893.730163574219" positionY="2536.68603515625" width="128" height="88"/>
     </elements>
 </model>

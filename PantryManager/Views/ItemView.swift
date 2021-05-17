@@ -13,11 +13,18 @@ struct ItemView: View {
     @Environment(\.presentationMode) var presentationMode
     let expiryDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateStyle = .short
+        formatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy")
+        return formatter
+    }()
+    let numberFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 2
         return formatter
     }()
     @Environment(\.editMode) var editMode
-    @State var itemDraft: FoodItem = FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
+    @Environment(\.managedObjectContext) private var database
+
     
     var body: some View {
         if editMode?.wrappedValue == .inactive {
@@ -25,8 +32,9 @@ struct ItemView: View {
                 Section(header: Text("Name")) {
                     Text(item.name)
                 }
+                // quantity to be fixed later
                 Section(header: Text("Quantity")) {
-                    Text(item.quantity == 1 ? "\(item.quantity) unit" : "\(item.quantity) units")
+                    Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none")")
                 }
                 Section(header: Text("Expiry Date")) {
                     Text("\(item.expiryDate, formatter: expiryDateFormatter)")
@@ -38,46 +46,58 @@ struct ItemView: View {
                     .foregroundColor(.red)
                     
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
                 
             }
+            .navigationTitle("Details")
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     EditButton()
                 }
+                //This fixes the back button strangely disappearing
+                ToolbarItemGroup(placement: .navigationBarLeading) {
+                    Text("")
+                }
             }
         } else {
-            EditItemView(item: $itemDraft)
+            
+            EditItemView(item: $item)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button("Done") {
-                             item = itemDraft
+                            //    MARK: TO DO - Disable button if one of the fiels is empty
+                            try? database.save()
                              editMode?.animation().wrappedValue = .inactive
                          }
                     }
                     ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button("Cancel") {
-                             editMode?.animation().wrappedValue = .inactive
+                            database.rollback()
+                            editMode?.animation().wrappedValue = .inactive
                          }
                     }
                 }
                 .onAppear() {
-                    itemDraft = item
+                    
                 }
+ 
         }
 
         
     }
     
     func deleteItem(item: FoodItem) {
-        viewModel.delete(item)
+        viewModel.delete(item, from: database)
         presentationMode.wrappedValue.dismiss()
     }
 }
-
+/*
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData = FoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
+        let sampleData = LocalFoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
         ItemView(item: sampleData, viewModel: PantryManagerViewModel())
     }
 }
+*/

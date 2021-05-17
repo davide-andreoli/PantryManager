@@ -9,41 +9,48 @@ import SwiftUI
 import Combine
 
 struct AddItemView: View {
+    @Environment(\.managedObjectContext) private var database
+    @FetchRequest var storages: FetchedResults<FoodStorage>
     
-    @State var itemStorage: String
-    @State private var item: FoodItem = FoodItem(name: "", quantity: 1, quantityType: .unit, expiryDate: Date())
+    @State var itemStorage: FoodStorage
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: PantryManagerViewModel
+    @State private var newItemName = ""
+    @State private var newItemExpiryDate = Date()
+    @State private var newItemQuantity: Int = 1
     
+    init(itemStorage: FoodStorage, viewModel: PantryManagerViewModel) {
+        _itemStorage = State(wrappedValue: itemStorage)
+        _viewModel = ObservedObject(wrappedValue: viewModel)
+        _storages = FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all))
+ 
+    }
 //    MARK: UI/UX - Is it better to delete the sections?
     
-//    MARK: TO DO - Detect where the view is being called and set that as the default place
+//    MARK: TO DO - Maybe use a FoodItem instead of placeholder variables
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Storage")) {
 
-                    Picker(selection: $item.storage, label: Text("Storage")) {
-                        ForEach(viewModel.storages, id:\.self) { storage in
-                            Text(storage)
+                    Picker(selection: $itemStorage, label: Text("Storage")) {
+                        ForEach(storages.sorted(), id:\.self) { storage in
+                            Text(storage.name)
                         }
                     }
                 }
-                .onAppear {
-                    item.storage = itemStorage
-                }
                 Section(header: Text("Name")) {
-                    TextField("Item name", text: $item.name)
+                    TextField("Item name", text: $newItemName)
                 }
                 Section(header: Text("Quantity")) {
-                    Stepper(value: $item.quantity, in: 1...Int.max) {
-                        TextField("Item quantity", value: $item.quantity, formatter: NumberFormatter())
+                    Stepper(value: $newItemQuantity, in: 1...Int.max) {
+                        TextField("Item quantity", value: $newItemQuantity, formatter: NumberFormatter())
                             .keyboardType(.numberPad)
                     }
                 }
                 Section(header: Text("Expiry Date")) {
-                    DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: [.date])
+                    DatePicker("Expiry Date", selection: $newItemExpiryDate, displayedComponents: [.date])
                     
                 }
             }
@@ -52,9 +59,10 @@ struct AddItemView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.add(item)
+                        viewModel.create(name: newItemName, expiryDate: newItemExpiryDate, storage: itemStorage, in: database)
                         presentationMode.wrappedValue.dismiss()
                     }) {
+                        //    MARK: TO DO - Disable button if one of the fiels is empty
                         Text("Add")
                     }
                 }
@@ -69,9 +77,10 @@ struct AddItemView: View {
         }
     }
 }
-
+/*
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView(itemStorage: "Pantry", viewModel: PantryManagerViewModel())
+        AddItemView(itemStorageOld: "Pantry", viewModel: PantryManagerViewModel())
     }
 }
+*/

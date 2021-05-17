@@ -9,12 +9,13 @@ import SwiftUI
 
 struct StoragesListView: View {
     @ObservedObject var viewModel: PantryManagerViewModel
+    @FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all)) var storages
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.storages, id:\.self) {storage in
-                    NavigationLink(destination: ItemListView(itemsStorage: storage, viewModel: viewModel)) {
-                        Text(storage)
+                ForEach(storages.sorted(), id:\.self) {storage in
+                    NavigationLink(destination: ItemListView(itemsStorageOld: storage.name, itemsStorage: storage, viewModel: viewModel)) {
+                        Text(storage.name)
                     }
                 }
             }

@@ -16,8 +16,12 @@
 		95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725D9926261DE300F7DABC /* PantryManagerApp.swift */; };
 		95725D9E26261DE500F7DABC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725D9D26261DE500F7DABC /* Assets.xcassets */; };
 		95725DA126261DE500F7DABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725DA026261DE500F7DABC /* Preview Assets.xcassets */; };
-		95725DAC262620C000F7DABC /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* FoodItem.swift */; };
+		95725DAC262620C000F7DABC /* LocalFoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* LocalFoodItem.swift */; };
+		958E5C4B2629E00400E45C8B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E5C4A2629E00400E45C8B /* Array+Extensions.swift */; };
 		9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */; };
+		95A94B3C2651677A0019AAAA /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3B2651677A0019AAAA /* FoodItem.swift */; };
+		95A94B3E2651679B0019AAAA /* FoodStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3D2651679B0019AAAA /* FoodStorage.swift */; };
+		95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */; };
 		95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A742626EBCA00EF954B /* AddItemView.swift */; };
 		95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A7D2627410600EF954B /* EditItemView.swift */; };
 /* End PBXBuildFile section */
@@ -35,7 +39,11 @@
 		95725D9D26261DE500F7DABC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		95725DA026261DE500F7DABC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		95725DA226261DE500F7DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		95725DAB262620C000F7DABC /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		95725DAB262620C000F7DABC /* LocalFoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFoodItem.swift; sourceTree = "<group>"; };
+		958E5C4A2629E00400E45C8B /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		95A94B3B2651677A0019AAAA /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
+		95A94B3D2651679B0019AAAA /* FoodStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorage.swift; sourceTree = "<group>"; };
+		95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Extensions.swift"; sourceTree = "<group>"; };
 		95CF6A742626EBCA00EF954B /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		95CF6A772627082200EF954B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		95CF6A7D2627410600EF954B /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
@@ -100,6 +108,7 @@
 		95725D9826261DE300F7DABC /* PantryManager */ = {
 			isa = PBXGroup;
 			children = (
+				958E5C492629DFED00E45C8B /* Extensions */,
 				954B7B692626C4D0003A9656 /* ViewModels */,
 				954B7B5F2626C1F2003A9656 /* Enums */,
 				95725DA92626208200F7DABC /* Models */,
@@ -124,10 +133,21 @@
 		95725DA92626208200F7DABC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95725DAB262620C000F7DABC /* FoodItem.swift */,
+				95725DAB262620C000F7DABC /* LocalFoodItem.swift */,
 				954B7B6A2626C5B1003A9656 /* PantryManager.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		958E5C492629DFED00E45C8B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				958E5C4A2629E00400E45C8B /* Array+Extensions.swift */,
+				95A94B3B2651677A0019AAAA /* FoodItem.swift */,
+				95A94B3D2651679B0019AAAA /* FoodStorage.swift */,
+				95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,14 +222,18 @@
 				95544FF0262997ED00529DF3 /* Persistence.swift in Sources */,
 				954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */,
 				9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */,
+				95A94B3E2651679B0019AAAA /* FoodStorage.swift in Sources */,
 				954B7B722626CCDE003A9656 /* ItemView.swift in Sources */,
 				95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */,
 				95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */,
 				95544F962628CA7200529DF3 /* ItemListView.swift in Sources */,
-				95725DAC262620C000F7DABC /* FoodItem.swift in Sources */,
+				958E5C4B2629E00400E45C8B /* Array+Extensions.swift in Sources */,
+				95725DAC262620C000F7DABC /* LocalFoodItem.swift in Sources */,
+				95A94B3C2651677A0019AAAA /* FoodItem.swift in Sources */,
 				95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */,
 				95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */,
 				954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */,
+				95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
