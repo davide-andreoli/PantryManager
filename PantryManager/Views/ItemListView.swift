@@ -10,16 +10,17 @@ import CoreData
 import Combine
 
 struct ItemListView: View {
-    @Environment(\.managedObjectContext) private var database
-
-    @State var itemsStorageOld: String
+    // State variables
     @State var itemsStorage: FoodStorage
-    @ObservedObject var viewModel: PantryManagerViewModel
     @State private var showingAddItemView: Bool = false
+    // View model
+    @ObservedObject var viewModel: PantryManagerViewModel
+    // Environment variables
+    @Environment(\.managedObjectContext) private var database
     //    MARK: TO DO - understand if it's better to refetch te results from the items of the given storage instead of passing the storage directly
+    // Fetch request to fecth all items from database
     @FetchRequest var items: FetchedResults<FoodItem>
-    init(itemsStorageOld: String, itemsStorage: FoodStorage, viewModel: PantryManagerViewModel) {
-        _itemsStorageOld = State(wrappedValue: itemsStorageOld)
+    init(itemsStorage: FoodStorage, viewModel: PantryManagerViewModel) {
         _itemsStorage = State(wrappedValue: itemsStorage)
         _viewModel = ObservedObject(wrappedValue: viewModel)
         let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
@@ -38,7 +39,9 @@ struct ItemListView: View {
                         }
                 }
                 .onDelete { indexSet in
-                    indexSet.map( { viewModel.delete(itemsStorage.items.sorted()[$0], from: database)} )
+                    indexSet.map { itemsStorage.items.sorted()[$0] }.forEach { item in
+                        viewModel.delete(item, from: database)
+                    }
                 }
 
             }
@@ -61,8 +64,11 @@ struct ItemListView: View {
 }
 /*
 struct ItemListView_Previews: PreviewProvider {
+    let database = PersistenceController.preview.container.viewContext
+
     static var previews: some View {
-        ItemListView(itemsStorageOld: "Pantry" ,viewModel: PantryManagerViewModel())
+        ItemListView(itemsStorageOld: "Pantry", itemsStorage: ,viewModel: PantryManagerViewModel())
+            .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
 */

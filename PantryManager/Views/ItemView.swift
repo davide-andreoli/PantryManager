@@ -8,20 +8,19 @@
 import SwiftUI
 
 struct ItemView: View {
+    // State variables
     @State var item: FoodItem
-    @ObservedObject var viewModel: PantryManagerViewModel
-    @Environment(\.presentationMode) var presentationMode
+    // Others
     let expiryDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.setLocalizedDateFormatFromTemplate("dd/MM/yyyy")
         return formatter
     }()
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
+    let numberFormatter = NumberFormatter.defaultFormatter
+    // View model
+    @ObservedObject var viewModel: PantryManagerViewModel
+    // Environment variables
+    @Environment(\.presentationMode) var presentationMode
     @Environment(\.editMode) var editMode
     @Environment(\.managedObjectContext) private var database
 
@@ -63,25 +62,8 @@ struct ItemView: View {
         } else {
             
             EditItemView(item: $item)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            //    MARK: TO DO - Disable button if one of the fiels is empty
-                            try? database.save()
-                             editMode?.animation().wrappedValue = .inactive
-                         }
-                    }
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        Button("Cancel") {
-                            database.rollback()
-                            editMode?.animation().wrappedValue = .inactive
-                         }
-                    }
-                }
-                .onAppear() {
-                    
-                }
+                
+
  
         }
 

@@ -9,24 +9,28 @@ import SwiftUI
 import Combine
 
 struct EditItemView: View {
+    // State variables
+    @State private var newItemQuantity: Double = 1
+    @State private var newExpiryDate: Date = Date()
+    @State private var newName: String = ""
+    // Bindings
     @Binding var item: FoodItem
-    @State private var quantity = 1.0
-    let numberFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 2
-        return formatter
-    }()
+    // Others
+    let numberFormatter = NumberFormatter.defaultFormatter
+    // Environment variables
+    @Environment(\.editMode) var editMode
+    @Environment(\.managedObjectContext) private var database
+    
 
     var body: some View {
         Form {
             Section(header: Text("Name")) {
-                TextField("", text: $item.name)
+                TextField("", text: $newName)
             }
 
             Section(header: Text("Quantity")) {
 
-                    TextField("Item quantity", value: $item.quantity, formatter: numberFormatter)
+                DoubleField("Item quantity", value: $newItemQuantity, formatter: numberFormatter)
                         .keyboardType(.numberPad)
                 // MARK: TO DO - Fix the quantity stepper
 /*
@@ -36,12 +40,37 @@ struct EditItemView: View {
                 }
                  */
             }
+            
 
             Section(header: Text("Expiry Date")) {
-                DatePicker("Expiry Date", selection: $item.expiryDate, displayedComponents: [.date])
+                DatePicker("Expiry Date", selection: $newExpiryDate, displayedComponents: [.date])
                 
             }
 
+        }
+        .onAppear {
+            // MARK: TO DO - maybe do this on an init
+            newItemQuantity = item.quantity
+            newExpiryDate = item.expiryDate
+            newName = item.name
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button("Done") {
+                    item.quantity = newItemQuantity
+                    item.expiryDate = newExpiryDate
+                    item.name = newName
+                    try? database.save()
+                     editMode?.animation().wrappedValue = .inactive
+                 }
+                .disabled(newName.isEmpty || newItemQuantity.isZero)
+            }
+            ToolbarItemGroup(placement: .navigationBarLeading) {
+                Button("Cancel") {
+                    editMode?.animation().wrappedValue = .inactive
+                 }
+            }
         }
     }
 }

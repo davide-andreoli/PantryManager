@@ -9,25 +9,28 @@ import SwiftUI
 import Combine
 
 struct AddItemView: View {
-    @Environment(\.managedObjectContext) private var database
-    @FetchRequest var storages: FetchedResults<FoodStorage>
-    
+    // State variables
     @State var itemStorage: FoodStorage
-    @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var viewModel: PantryManagerViewModel
     @State private var newItemName = ""
     @State private var newItemExpiryDate = Date()
-    @State private var newItemQuantity: Int = 1
+    @State private var newItemQuantity: Double = 1
+    // Others
+    let numberFormatter = NumberFormatter.defaultFormatter
+    // View Model
+    @ObservedObject var viewModel: PantryManagerViewModel
+    //Environment variables
+    @Environment(\.managedObjectContext) private var database
+    @Environment(\.presentationMode) var presentationMode
+    // Fetch request to fetch all storages
+    @FetchRequest var storages: FetchedResults<FoodStorage>
     
+    //Custom initializer, necessary to initialize the storages request
     init(itemStorage: FoodStorage, viewModel: PantryManagerViewModel) {
         _itemStorage = State(wrappedValue: itemStorage)
         _viewModel = ObservedObject(wrappedValue: viewModel)
         _storages = FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all))
- 
     }
 //    MARK: UI/UX - Is it better to delete the sections?
-    
-//    MARK: TO DO - Maybe use a FoodItem instead of placeholder variables
     
     var body: some View {
         NavigationView {
@@ -44,14 +47,10 @@ struct AddItemView: View {
                     TextField("Item name", text: $newItemName)
                 }
                 Section(header: Text("Quantity")) {
-                    Stepper(value: $newItemQuantity, in: 1...Int.max) {
-                        TextField("Item quantity", value: $newItemQuantity, formatter: NumberFormatter())
-                            .keyboardType(.numberPad)
-                    }
+                    DoubleField("Item quantity", value: $newItemQuantity, formatter: numberFormatter)
                 }
                 Section(header: Text("Expiry Date")) {
                     DatePicker("Expiry Date", selection: $newItemExpiryDate, displayedComponents: [.date])
-                    
                 }
             }
             .navigationTitle("Add Item")
@@ -59,12 +58,12 @@ struct AddItemView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.create(name: newItemName, expiryDate: newItemExpiryDate, storage: itemStorage, in: database)
+                        viewModel.create(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: itemStorage, in: database)
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        //    MARK: TO DO - Disable button if one of the fiels is empty
                         Text("Add")
                     }
+                    .disabled(newItemName.isEmpty || newItemQuantity == 0)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button(action: {

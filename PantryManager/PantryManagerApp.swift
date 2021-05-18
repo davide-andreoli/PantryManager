@@ -31,11 +31,11 @@ struct PantryManagerApp: App {
             }
             .environment(\.managedObjectContext, persistenceController.container.viewContext)
             .onAppear {
-                initializeData()
+//                initializeData()
             }
         }
     }
-    
+    /*
     func initializeData() {
         // Clear the database --> will have to implement the app filling only at first launch
         var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FoodStorage")
@@ -64,5 +64,5 @@ struct PantryManagerApp: App {
         try? persistenceController.container.viewContext.save()
         
         persistenceController.container.viewContext.undoManager = UndoManager()
-    }
+    }*/
 }

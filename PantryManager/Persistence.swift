@@ -14,9 +14,16 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
+        for _ in 0..<1 {
+            let newStorage = FoodStorage(context: viewContext)
+            newStorage.name = "Storage"
+            newStorage.id = UUID()
             let newItem = FoodItem(context: viewContext)
             newItem.expiryDate_ = Date()
+            newItem.name = "Name"
+            newItem.quantity = 1
+            newItem.id = UUID()
+            newItem.storage = newStorage
         }
         do {
             try viewContext.save()
