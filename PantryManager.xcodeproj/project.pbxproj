@@ -24,6 +24,7 @@
 		95725DAC262620C000F7DABC /* LocalFoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95725DAB262620C000F7DABC /* LocalFoodItem.swift */; };
 		958E5C4B2629E00400E45C8B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E5C4A2629E00400E45C8B /* Array+Extensions.swift */; };
 		9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */; };
+		95A80A4A27F993B20032A920 /* CreateStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A80A4927F993B20032A920 /* CreateStorageView.swift */; };
 		95A94B3C2651677A0019AAAA /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3B2651677A0019AAAA /* FoodItem.swift */; };
 		95A94B3E2651679B0019AAAA /* FoodStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3D2651679B0019AAAA /* FoodStorage.swift */; };
 		95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */; };
@@ -51,6 +52,7 @@
 		95725DA226261DE500F7DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95725DAB262620C000F7DABC /* LocalFoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalFoodItem.swift; sourceTree = "<group>"; };
 		958E5C4A2629E00400E45C8B /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		95A80A4927F993B20032A920 /* CreateStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorageView.swift; sourceTree = "<group>"; };
 		95A94B3B2651677A0019AAAA /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
 		95A94B3D2651679B0019AAAA /* FoodStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorage.swift; sourceTree = "<group>"; };
 		95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Extensions.swift"; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				95CF6A7D2627410600EF954B /* EditItemView.swift */,
 				95544F952628CA7200529DF3 /* ItemListView.swift */,
 				95544F982628D36F00529DF3 /* StoragesListView.swift */,
+				95A80A4927F993B20032A920 /* CreateStorageView.swift */,
 				9518B23A2653A3BD004528FC /* CollectiveButtonView.swift */,
 				9518B2382653A2CD004528FC /* AllItemsView.swift */,
 			);
@@ -262,6 +265,7 @@
 				954B7B6B2626C5B1003A9656 /* PantryManager.swift in Sources */,
 				95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */,
 				9518B2392653A2CD004528FC /* AllItemsView.swift in Sources */,
+				95A80A4A27F993B20032A920 /* CreateStorageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

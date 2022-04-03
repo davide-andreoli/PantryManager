@@ -74,11 +74,11 @@ struct EditItemView: View {
         }
     }
 }
-/*
+
 struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData = LocalFoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
+        let sampleData = FoodItem(name: "Eggs", expiryDate: Date())
         EditItemView(item: .constant(sampleData))
     }
 }
-*/
+

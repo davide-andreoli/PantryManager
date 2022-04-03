@@ -55,3 +55,11 @@ extension FoodStorage: Comparable {
     }
 }
 
+extension FoodStorage {
+    convenience init(name: String, items: Set<FoodItem> = Set<FoodItem>(), id: UUID = UUID()) {
+        self.init(context: PersistenceController.shared.container.viewContext)
+        self.name = name
+        self.items = items
+        self.id = id
+    }
+}

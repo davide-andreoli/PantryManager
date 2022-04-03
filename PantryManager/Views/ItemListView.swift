@@ -40,7 +40,7 @@ struct ItemListView: View {
                 }
                 .onDelete { indexSet in
                     indexSet.map { itemsStorage.items.sorted()[$0] }.forEach { item in
-                        viewModel.delete(item, from: database)
+                        viewModel.deleteItem(item, from: database)
                     }
                 }
 
@@ -62,13 +62,16 @@ struct ItemListView: View {
                 }
     }
 }
-/*
+
 struct ItemListView_Previews: PreviewProvider {
     let database = PersistenceController.preview.container.viewContext
+    static let foodStorage = FoodStorage(name: "Storage", items: [FoodItem(name: "Item1"), FoodItem(name: "Item2")])
+    
+    
 
     static var previews: some View {
-        ItemListView(itemsStorageOld: "Pantry", itemsStorage: ,viewModel: PantryManagerViewModel())
+        ItemListView(itemsStorage: foodStorage, viewModel: PantryManagerViewModel())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
-*/
+

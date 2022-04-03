@@ -12,6 +12,7 @@ struct StoragesListView: View {
     // State variable
     @State private var allItemsCount: Int = 0
     @State private var showingSortSheet = false
+    @State private var showCreateStorageView = false
     @State private var sortOrder: ((FoodStorage, FoodStorage) -> Bool) = { storage1, storage2 in
         storage1.name < storage2.name
     }
@@ -23,49 +24,58 @@ struct StoragesListView: View {
     
     var body: some View {
         NavigationView {
-                VStack {
-                    /*HStack {
+            VStack {
+                    HStack {
                          NavigationLink(destination: AllItemsView()) {
                              CollectiveButtonView(imageName: "tray.2", count: allItemsCount, title: "All items")
                          }
                          .buttonStyle(PlainButtonStyle())
                          Spacer()
                              .frame(minWidth: 100)
-                     }*/
-                    List {
+                     }
+                List {
                         ForEach(storages.sorted(by: sortOrder), id:\.self) {storage in
                                 NavigationLink(destination: ItemListView(itemsStorage: storage, viewModel: viewModel)) {
                                     Text(storage.name)
                                 }
                             }
-                        }
-                    .actionSheet(isPresented: $showingSortSheet) {
-                        ActionSheet(
-                            title: Text("Change sort order"),
-                            buttons: [
-                                .default(Text("Name ascending"), action: { changeSortOrder(to: "alphabetical ascending") }),
-                                .default(Text("Name descending"), action: { changeSortOrder(to: "alphabetical descending") }),
-                                .cancel(Text("Dismiss"))
+                }
+                .actionSheet(isPresented: $showingSortSheet) {
+                    ActionSheet(
+                        title: Text("Change sort order"),
+                        buttons: [
+                            .default(Text("Name ascending"), action: { changeSortOrder(to: "alphabetical ascending") }),
+                            .default(Text("Name descending"), action: { changeSortOrder(to: "alphabetical descending") }),
+                            .cancel(Text("Dismiss"))
                         ])
                     }
-                    .navigationTitle("Storages")
-                    .toolbar {
-                        ToolbarItemGroup(placement: .navigationBarTrailing) {
-                            Button(action: {
-                                showingSortSheet.toggle()
-                            }) {
-                                Image(systemName: "arrow.up.arrow.down.circle")
-                            }
+                .sheet(isPresented: $showCreateStorageView) {
+                    CreateStorageView(viewModel: viewModel)
+                }
+                .navigationTitle("Storages")
+                .toolbar {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button(action: {
+                            showingSortSheet.toggle()
+                        }) {
+                            Image(systemName: "arrow.up.arrow.down.circle")
                         }
                     }
-
-                }
-                .onAppear {
-                    storages.sorted().forEach { storage in
-                        var itemsCount = 0
-                        itemsCount += storage.items.count
-                        allItemsCount = itemsCount
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        Button(action: {
+                            showCreateStorageView.toggle()
+                        }) {
+                            Image(systemName: "plus")
+                        }
                     }
+                }
+            }
+            .onAppear {
+                storages.forEach { storage in
+                    var itemsCount = 0
+                    itemsCount += storage.items.count
+                    allItemsCount = itemsCount
+                }
             }
         }
     }
@@ -113,11 +123,11 @@ struct ListView: View {
     }
 }
 
-/*
+
 struct StoragesListView_Previews: PreviewProvider {
     static var previews: some View {
         StoragesListView(viewModel: PantryManagerViewModel())
             .environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
-*/
+

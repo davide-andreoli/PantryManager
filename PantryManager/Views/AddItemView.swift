@@ -58,7 +58,7 @@ struct AddItemView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.create(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: itemStorage, in: database)
+                        viewModel.addItem(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: itemStorage, in: database)
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Add")
@@ -76,10 +76,11 @@ struct AddItemView: View {
         }
     }
 }
-/*
+
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView(itemStorageOld: "Pantry", viewModel: PantryManagerViewModel())
+        let foodStorage = FoodStorage(name: "Storage")
+        AddItemView(itemStorage: foodStorage, viewModel: PantryManagerViewModel())
     }
 }
-*/
+

@@ -59,3 +59,12 @@ extension FoodItem: Comparable {
     
     
 }
+
+extension FoodItem {
+    convenience init(name: String, id: UUID = UUID(), expiryDate: Date = Date()) {
+        self.init(context: PersistenceController.shared.container.viewContext)
+        self.name = name
+        self.id = id
+        self.expiryDate = expiryDate
+    }
+}

@@ -71,15 +71,15 @@ struct ItemView: View {
     }
     
     func deleteItem(item: FoodItem) {
-        viewModel.delete(item, from: database)
+        viewModel.deleteItem(item, from: database)
         presentationMode.wrappedValue.dismiss()
     }
 }
-/*
+
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData = LocalFoodItem(name: "Eggs", quantity: 3, quantityType: .unit, expiryDate: Date())
+        let sampleData = FoodItem(name: "Eggs", expiryDate: Date())
         ItemView(item: sampleData, viewModel: PantryManagerViewModel())
     }
 }
-*/
+
