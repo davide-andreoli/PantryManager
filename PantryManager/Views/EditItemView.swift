@@ -13,6 +13,7 @@ struct EditItemView: View {
     @State private var newItemQuantity: Double = 1
     @State private var newExpiryDate: Date = Date()
     @State private var newName: String = ""
+    @State private var newItemQuantityUnit: FoodItemQuantityUnit = .boxess
     // Bindings
     @Binding var item: FoodItem
     // Others
@@ -21,7 +22,6 @@ struct EditItemView: View {
     @Environment(\.editMode) var editMode
     @Environment(\.managedObjectContext) private var database
     
-
     var body: some View {
         Form {
             Section(header: Text("Name")) {
@@ -39,6 +39,11 @@ struct EditItemView: View {
                         .keyboardType(.numberPad)
                 }
                  */
+                Picker(selection: $newItemQuantityUnit, label: Text("Quantity unit")) {
+                    ForEach(FoodItemQuantityUnit.allCases.sorted(by: {$0.rawValue < $1.rawValue}), id:\.rawValue) { unitCase in
+                        Text(unitCase.rawValue).tag(unitCase)
+                    }
+                }
             }
             
 
@@ -53,12 +58,15 @@ struct EditItemView: View {
             newItemQuantity = item.quantity
             newExpiryDate = item.expiryDate
             newName = item.name
+            newItemQuantityUnit = item.quantityUnit
+            
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button("Done") {
                     item.quantity = newItemQuantity
+                    item.quantityUnit = newItemQuantityUnit
                     item.expiryDate = newExpiryDate
                     item.name = newName
                     try? database.save()

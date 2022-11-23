@@ -10,10 +10,11 @@ import Combine
 
 struct AddItemView: View {
     // State variables
-    @State var itemStorage: FoodStorage
+    @State var newItemStorage: FoodStorage
     @State private var newItemName = ""
     @State private var newItemExpiryDate = Date()
     @State private var newItemQuantity: Double = 1
+    @State private var newItemQuantityUnit: FoodItemQuantityUnit = .boxess
     // Others
     let numberFormatter = NumberFormatter.defaultFormatter
     // View Model
@@ -26,7 +27,7 @@ struct AddItemView: View {
     
     //Custom initializer, necessary to initialize the storages request
     init(itemStorage: FoodStorage, viewModel: PantryManagerViewModel) {
-        _itemStorage = State(wrappedValue: itemStorage)
+        _newItemStorage = State(wrappedValue: itemStorage)
         _viewModel = ObservedObject(wrappedValue: viewModel)
         _storages = FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all))
     }
@@ -37,7 +38,7 @@ struct AddItemView: View {
             Form {
                 Section(header: Text("Storage")) {
 
-                    Picker(selection: $itemStorage, label: Text("Storage")) {
+                    Picker(selection: $newItemStorage, label: Text("Storage")) {
                         ForEach(storages.sorted(), id:\.self) { storage in
                             Text(storage.name)
                         }
@@ -48,6 +49,11 @@ struct AddItemView: View {
                 }
                 Section(header: Text("Quantity")) {
                     DoubleField("Item quantity", value: $newItemQuantity, formatter: numberFormatter)
+                    Picker(selection: $newItemQuantityUnit, label: Text("What is the unit?")) {
+                        ForEach(FoodItemQuantityUnit.allCases.sorted(by: {$0.rawValue < $1.rawValue}), id:\.rawValue) { unitCase in
+                            Text(unitCase.rawValue).tag(unitCase)
+                        }
+                    }
                 }
                 Section(header: Text("Expiry Date")) {
                     DatePicker("Expiry Date", selection: $newItemExpiryDate, displayedComponents: [.date])
@@ -58,7 +64,7 @@ struct AddItemView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.addItem(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: itemStorage, in: database)
+                        viewModel.addItem(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: newItemStorage, in: database)
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Add")

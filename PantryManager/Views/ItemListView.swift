@@ -11,45 +11,53 @@ import Combine
 
 struct ItemListView: View {
     // State variables
-    @State var itemsStorage: FoodStorage
+    @State var itemsStorage: FoodStorage?
     @State private var showingAddItemView: Bool = false
     // View model
     @ObservedObject var viewModel: PantryManagerViewModel
     // Environment variables
     @Environment(\.managedObjectContext) private var database
-    //    MARK: TO DO - understand if it's better to refetch te results from the items of the given storage instead of passing the storage directly
-    // Fetch request to fecth all items from database
+    // Fetch request to fecth items from database
     @FetchRequest var items: FetchedResults<FoodItem>
-    init(itemsStorage: FoodStorage, viewModel: PantryManagerViewModel) {
-        _itemsStorage = State(wrappedValue: itemsStorage)
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-        let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
-        request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
-        request.predicate = NSPredicate(format: "storage = %@", itemsStorage)
-        _items = FetchRequest(fetchRequest: request)
+    init(itemsStorage: FoodStorage?, viewModel: PantryManagerViewModel) {
+        if let itemsStorage = itemsStorage {
+            _itemsStorage = State(wrappedValue: itemsStorage)
+            _viewModel = ObservedObject(wrappedValue: viewModel)
+            let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
+            request.predicate = NSPredicate(format: "storage != nil AND storage.name_ == %@", itemsStorage.name)
+            request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
+            _items = FetchRequest(fetchRequest: request)
+        } else {
+            _viewModel = ObservedObject(wrappedValue: viewModel)
+            let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
+            request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
+            _items = FetchRequest(fetchRequest: request)
+        }
  
     }
     
     var body: some View {
             List {
-                ForEach(itemsStorage.items.sorted()) { item in
+                ForEach(items) { item in
                        
                     NavigationLink(destination: ItemView(item: item, viewModel: viewModel)) {
                             Text(item.name)
+                        
                         }
                 }
                 .onDelete { indexSet in
-                    indexSet.map { itemsStorage.items.sorted()[$0] }.forEach { item in
+                    indexSet.map { items[$0] }.forEach { item in
                         viewModel.deleteItem(item, from: database)
                     }
                 }
 
             }
                 .sheet(isPresented: $showingAddItemView) {
-                    AddItemView(itemStorage: itemsStorage, viewModel: viewModel)
+                    // MARK: TO DO - Send the storage as an optional
+                    AddItemView(itemStorage: itemsStorage!, viewModel: viewModel)
                         .environment(\.managedObjectContext, database)
                 }
-            .navigationTitle(itemsStorage.name)
+            .navigationTitle(itemsStorage?.name ?? "Title")
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
                         Button(action: {

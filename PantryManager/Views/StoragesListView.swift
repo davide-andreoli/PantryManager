@@ -26,7 +26,7 @@ struct StoragesListView: View {
         NavigationView {
             VStack {
                     HStack {
-                         NavigationLink(destination: AllItemsView()) {
+                         NavigationLink(destination: ItemListView(itemsStorage: nil, viewModel: viewModel)) {
                              CollectiveButtonView(imageName: "tray.2", count: allItemsCount, title: "All items")
                          }
                          .buttonStyle(PlainButtonStyle())

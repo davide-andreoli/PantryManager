@@ -71,6 +71,8 @@ struct PantryManagerApp: App {
         
         try? persistenceController.container.viewContext.save()
         
-        persistenceController.container.viewContext.undoManager = UndoManager()
+        persistenceController.container.viewContext.refreshAllObjects()
+        
+   
     }
 }

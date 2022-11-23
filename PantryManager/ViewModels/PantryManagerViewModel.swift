@@ -11,12 +11,6 @@ import CoreData
 import Combine
 
 class PantryManagerViewModel: ObservableObject {
-    
-    @Published var pantryManagerModel = PantryManager()
-    
-    // Returns all the items in the model
-
-    // Returns all the storages in the model
 
     //Create an item in the database
     func addItem(name: String, expiryDate: Date, quantity: Double, storage: FoodStorage, in database: NSManagedObjectContext) {
@@ -34,6 +28,22 @@ class PantryManagerViewModel: ObservableObject {
     func deleteItem(_ item: FoodItem, from database: NSManagedObjectContext) {
 
         database.delete(item)
+        try? database.save()
+    }
+    
+    //Create a storage in the database
+    func createStorage(name: String, in database: NSManagedObjectContext) {
+        let newStorage = FoodStorage(context: database)
+        newStorage.name = name
+        newStorage.items = []
+        newStorage.id = UUID()
+        
+        try? database.save()
+    }
+    
+    // Delete storage function
+    func deleteStorage(_ storage: FoodStorage, from database: NSManagedObjectContext) {
+        database.delete(storage)
         try? database.save()
     }
 }

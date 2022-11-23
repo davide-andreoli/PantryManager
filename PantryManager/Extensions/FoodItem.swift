@@ -43,6 +43,15 @@ extension FoodItem {
         }
     }
     
+    var quantityUnit: FoodItemQuantityUnit {
+        get {
+            FoodItemQuantityUnit(rawValue: quantityUnit_ ?? "cans") ?? FoodItemQuantityUnit.cans
+        }
+        set {
+            quantityUnit_ = newValue.rawValue
+        }
+    }
+    
 
     
     
@@ -66,5 +75,7 @@ extension FoodItem {
         self.name = name
         self.id = id
         self.expiryDate = expiryDate
+        self.quantity = 1
+        self.quantityUnit = FoodItemQuantityUnit.bottles
     }
 }

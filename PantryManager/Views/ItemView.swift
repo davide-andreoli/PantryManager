@@ -33,7 +33,7 @@ struct ItemView: View {
                 }
                 // quantity to be fixed later
                 Section(header: Text("Quantity")) {
-                    Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none")")
+                    Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none") \(item.quantityUnit.rawValue)")
                 }
                 Section(header: Text("Expiry Date")) {
                     Text("\(item.expiryDate, formatter: expiryDateFormatter)")
