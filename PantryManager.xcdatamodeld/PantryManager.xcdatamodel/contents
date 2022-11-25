@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="FoodItem" representedClassName=".FoodItem" syncable="YES" codeGenerationType="class">
-        <attribute name="expiryDate_" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name_" optional="YES" attributeType="String"/>
-        <attribute name="quantity" optional="YES" attributeType="Double" usesScalarValueType="YES"/>
-        <attribute name="quantityUnit_" optional="YES" attributeType="String"/>
-        <relationship name="storage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodStorage" inverseName="items_" inverseEntity="FoodStorage"/>
+    <entity name="FoodItem" representedClassName="FoodItem" syncable="YES" codeGenerationType="class">
+        <attribute name="expiryDate" attributeType="Date" defaultDateTimeInterval="690925620" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="Eggs"/>
+        <attribute name="quantity" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="quantityUnitString" optional="YES" attributeType="String"/>
+        <relationship name="storage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodStorage" inverseName="items" inverseEntity="FoodStorage"/>
     </entity>
     <entity name="FoodStorage" representedClassName="FoodStorage" syncable="YES" codeGenerationType="class">
-        <attribute name="id_" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="name_" optional="YES" attributeType="String"/>
-        <relationship name="items_" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItem" inverseName="storage" inverseEntity="FoodItem"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" attributeType="String" defaultValueString="Storage"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItem" inverseName="storage" inverseEntity="FoodItem"/>
     </entity>
 </model>

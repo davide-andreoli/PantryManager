@@ -29,14 +29,14 @@ struct ItemView: View {
         if editMode?.wrappedValue == .inactive {
             Form {
                 Section(header: Text("Name")) {
-                    Text(item.name)
+                    Text(item.name ?? "No item")
                 }
                 // quantity to be fixed later
                 Section(header: Text("Quantity")) {
                     Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none") \(item.quantityUnit.rawValue)")
                 }
                 Section(header: Text("Expiry Date")) {
-                    Text("\(item.expiryDate, formatter: expiryDateFormatter)")
+                    Text("\(item.expiryDate ?? Date(), formatter: expiryDateFormatter)")
                 }
                 Section {
                     Button(action: {deleteItem(item: item)}) {

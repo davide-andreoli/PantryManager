@@ -59,7 +59,6 @@ struct PantryManagerApp: App {
         foodItem.quantity = 1
         foodItem.expiryDate = Date()
         foodItem.storage = foodStorage
-        print(foodItem.quantity)
         
         let foodItem2 = FoodItem(context: persistenceController.container.viewContext)
         foodItem2.name = "Milk"
@@ -67,7 +66,6 @@ struct PantryManagerApp: App {
         foodItem2.quantity = 1
         foodItem2.expiryDate = Date()
         foodItem2.storage = foodStorage2
-        print(foodItem2.quantity)
         
         try? persistenceController.container.viewContext.save()
         

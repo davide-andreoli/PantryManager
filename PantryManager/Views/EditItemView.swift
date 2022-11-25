@@ -56,8 +56,8 @@ struct EditItemView: View {
         .onAppear {
             // MARK: TO DO - maybe do this on an init
             newItemQuantity = item.quantity
-            newExpiryDate = item.expiryDate
-            newName = item.name
+            newExpiryDate = item.expiryDate!
+            newName = item.name!
             newItemQuantityUnit = item.quantityUnit
             
         }

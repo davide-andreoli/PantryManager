@@ -20,13 +20,12 @@ class PantryManagerViewModel: ObservableObject {
         newItem.expiryDate = expiryDate
         newItem.quantity = quantity
         newItem.storage = storage
+        newItem.objectWillChange.send()
         try? database.save()
-
     }
 
     // Delete item function, for removal with an item directly
     func deleteItem(_ item: FoodItem, from database: NSManagedObjectContext) {
-
         database.delete(item)
         try? database.save()
     }

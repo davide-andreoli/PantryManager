@@ -19,7 +19,7 @@ struct PersistenceController {
             newStorage.name = "Storage"
             newStorage.id = UUID()
             let newItem = FoodItem(context: viewContext)
-            newItem.expiryDate_ = Date()
+            newItem.expiryDate = Date()
             newItem.name = "Name"
             newItem.quantity = 1
             newItem.id = UUID()

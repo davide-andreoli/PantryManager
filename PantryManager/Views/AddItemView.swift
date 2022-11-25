@@ -40,7 +40,7 @@ struct AddItemView: View {
 
                     Picker(selection: $newItemStorage, label: Text("Storage")) {
                         ForEach(storages.sorted(), id:\.self) { storage in
-                            Text(storage.name)
+                            Text(storage.name!)
                         }
                     }
                 }

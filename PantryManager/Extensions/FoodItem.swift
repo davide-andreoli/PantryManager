@@ -17,53 +17,22 @@ import Combine
  }
  */
 extension FoodItem {
-    public var id: UUID {
-        get {
-            id_ ?? UUID()
-        }
-        set {
-            id_ = newValue
-        }
-    }
-    
-    var name: String {
-        get {
-            name_ ?? "Unknown name"
-        }
-        set {
-            name_ = newValue
-        }
-    }
-    var expiryDate: Date {
-        get {
-            expiryDate_ ?? Date()
-        }
-        set {
-            expiryDate_ = newValue
-        }
-    }
     
     var quantityUnit: FoodItemQuantityUnit {
         get {
-            FoodItemQuantityUnit(rawValue: quantityUnit_ ?? "cans") ?? FoodItemQuantityUnit.cans
+            FoodItemQuantityUnit(rawValue: quantityUnitString ?? "cans") ?? FoodItemQuantityUnit.cans
         }
         set {
-            quantityUnit_ = newValue.rawValue
+            quantityUnitString = newValue.rawValue
         }
     }
     
-
-    
-    
-
-    
-
 }
 
 // Make two food items comparable by comparing their expiry date
 extension FoodItem: Comparable {
     public static func < (lhs: FoodItem, rhs: FoodItem) -> Bool {
-        return lhs.expiryDate < rhs.expiryDate
+        return lhs.expiryDate! < rhs.expiryDate!
     }
     
     
@@ -78,4 +47,12 @@ extension FoodItem {
         self.quantity = 1
         self.quantityUnit = FoodItemQuantityUnit.bottles
     }
+    
+    static let sortOrders: [String : (FoodItem, FoodItem) -> Bool] = [
+        "Alphabetical ascending" : { item1, item2 in item1.name! < item2.name!},
+        "Alphabetical descending" : { item1, item2 in item1.name! > item2.name!},
+        "Expiry date ascending" : { item1, item2 in item1.expiryDate! < item2.expiryDate!},
+        "Expiry date descending" : { item1, item2 in item1.expiryDate! > item2.expiryDate!}
+    ]
+    
 }

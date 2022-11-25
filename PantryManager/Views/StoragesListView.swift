@@ -14,13 +14,15 @@ struct StoragesListView: View {
     @State private var showingSortSheet = false
     @State private var showCreateStorageView = false
     @State private var sortOrder: ((FoodStorage, FoodStorage) -> Bool) = { storage1, storage2 in
-        storage1.name < storage2.name
+        storage1.name! < storage2.name!
     }
     //View Model
     @ObservedObject var viewModel: PantryManagerViewModel
     //Fetch request to fetch storages from database
-    @FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all)) var storages
-
+    //@FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all)) var storages
+    @FetchRequest(
+        sortDescriptors: [ SortDescriptor(\.name)]
+    ) var storages: FetchedResults<FoodStorage>
     
     var body: some View {
         NavigationView {
@@ -36,19 +38,17 @@ struct StoragesListView: View {
                 List {
                         ForEach(storages.sorted(by: sortOrder), id:\.self) {storage in
                                 NavigationLink(destination: ItemListView(itemsStorage: storage, viewModel: viewModel)) {
-                                    Text(storage.name)
+                                    Text(storage.name!)
                                 }
                             }
                 }
                 .actionSheet(isPresented: $showingSortSheet) {
                     ActionSheet(
                         title: Text("Change sort order"),
-                        buttons: [
-                            .default(Text("Name ascending"), action: { changeSortOrder(to: "alphabetical ascending") }),
-                            .default(Text("Name descending"), action: { changeSortOrder(to: "alphabetical descending") }),
-                            .cancel(Text("Dismiss"))
-                        ])
-                    }
+                        buttons: FoodStorage.sortOrders.keys.sorted().map { key in
+                                .default(Text(key), action: { changeSortOrder(to: key) })
+                        } + [.cancel(Text("Dismiss"))]
+                    )}
                 .sheet(isPresented: $showCreateStorageView) {
                     CreateStorageView(viewModel: viewModel)
                 }
@@ -60,20 +60,21 @@ struct StoragesListView: View {
                         }) {
                             Image(systemName: "arrow.up.arrow.down.circle")
                         }
-                    }
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
                         Button(action: {
                             showCreateStorageView.toggle()
                         }) {
                             Image(systemName: "plus")
                         }
                     }
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+
+                    }
                 }
             }
             .onAppear {
                 storages.forEach { storage in
                     var itemsCount = 0
-                    itemsCount += storage.items.count
+                    itemsCount += storage.items!.count
                     allItemsCount = itemsCount
                 }
             }
@@ -82,15 +83,7 @@ struct StoragesListView: View {
     
     func changeSortOrder(to order: String) {
         withAnimation {
-            if order == "alphabetical ascending" {
-                sortOrder = { storage1, storage2 in
-                    storage1.name < storage2.name
-                }
-            } else if order == "alphabetical descending" {
-                sortOrder = { storage1, storage2 in
-                    storage1.name > storage2.name
-                }
-            }
+            sortOrder = FoodStorage.sortOrders[order]!
         }
     }
 }
@@ -115,7 +108,7 @@ struct ListView: View {
         List {
             ForEach(storages, id:\.self) {storage in
                     NavigationLink(destination: ItemListView(itemsStorage: storage, viewModel: viewModel)) {
-                        Text(storage.name)
+                        Text(storage.name!)
                     }
                 }
             }
