@@ -7,19 +7,25 @@
 
 import SwiftUI
 
-struct CreateStorageView: View {
-    @State private var newStorageName: String = ""
-    @ObservedObject var viewModel: PantryManagerViewModel
+struct AddStorageView: View {
+    @StateObject var foodStorageViewModel: FoodStorageViewModel
     //Environment variables
     @Environment(\.managedObjectContext) private var database
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject private var dataManager: DataManager
     
     var body: some View {
         NavigationView {
             Form {
                 Section(header: Text("Storage name")) {
-                    TextField("Storage name", text: $newStorageName)
+                    TextField("Storage name", text: $foodStorageViewModel.draft.name)
+                    Picker("Storage icon", selection: $foodStorageViewModel.draft.iconName) {
+                        ForEach(FoodStorageStruct.iconNames.sorted(), id:\.self) { value in
+                            Image(systemName: value)
+                        }
+                    }
                 }
+                
                
             }
             .navigationTitle("Add Storage")
@@ -27,12 +33,12 @@ struct CreateStorageView: View {
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.createStorage(name: newStorageName, in: database)
+                        foodStorageViewModel.addNewStorage()
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Add")
                     }
-                    .disabled(newStorageName.isEmpty)
+                    .disabled(foodStorageViewModel.draft.name.isEmpty)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button(action: {
@@ -45,11 +51,12 @@ struct CreateStorageView: View {
         }
     }
 }
-
-struct CreateStorageView_Previews: PreviewProvider {
+/*
+struct AddStorageView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CreateStorageView(viewModel: PantryManagerViewModel())
+            AddStorageView(viewModel: PantryManagerViewModel())
         }
     }
 }
+*/

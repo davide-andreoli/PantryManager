@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ItemView: View {
     // State variables
-    @State var item: FoodItem
+    @State var item: FoodItemStruct
     // Others
     let expiryDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -17,26 +17,25 @@ struct ItemView: View {
         return formatter
     }()
     let numberFormatter = NumberFormatter.defaultFormatter
-    // View model
-    @ObservedObject var viewModel: PantryManagerViewModel
     // Environment variables
+    @EnvironmentObject private var dataManager: DataManager
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.editMode) var editMode
-    @Environment(\.managedObjectContext) private var database
+
 
     
     var body: some View {
         if editMode?.wrappedValue == .inactive {
             Form {
                 Section(header: Text("Name")) {
-                    Text(item.name ?? "No item")
+                    Text(item.name)
                 }
                 // quantity to be fixed later
                 Section(header: Text("Quantity")) {
-                    Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none") \(item.quantityUnit.rawValue)")
+                    Text("\(numberFormatter.string(from: item.quantity as NSNumber) ?? "none") \(item.quantityUnit)")
                 }
                 Section(header: Text("Expiry Date")) {
-                    Text("\(item.expiryDate ?? Date(), formatter: expiryDateFormatter)")
+                    Text("\(item.expiryDate, formatter: expiryDateFormatter)")
                 }
                 Section {
                     Button(action: {deleteItem(item: item)}) {
@@ -61,7 +60,7 @@ struct ItemView: View {
             }
         } else {
             
-            EditItemView(item: $item)
+            EditItemView(foodItemViewModel: dataManager.foodItemViewModel(foodItemStruct: item))
                 
 
  
@@ -70,16 +69,19 @@ struct ItemView: View {
         
     }
     
-    func deleteItem(item: FoodItem) {
-        viewModel.deleteItem(item, from: database)
+    func deleteItem(item: FoodItemStruct) {
+        
+        dataManager.deleteItem(using: item)
         presentationMode.wrappedValue.dismiss()
     }
 }
 
-struct ItemView_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleData = FoodItem(name: "Eggs", expiryDate: Date())
-        ItemView(item: sampleData, viewModel: PantryManagerViewModel())
-    }
-}
-
+/*
+ struct ItemView_Previews: PreviewProvider {
+ static var previews: some View {
+ let sampleData = FoodItemStruct(from: FoodItem(name: "Eggs", expiryDate: Date()))
+ ItemView(item: sampleData)
+ }
+ }
+ 
+ */

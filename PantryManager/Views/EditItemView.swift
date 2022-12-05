@@ -9,13 +9,10 @@ import SwiftUI
 import Combine
 
 struct EditItemView: View {
-    // State variables
-    @State private var newItemQuantity: Double = 1
-    @State private var newExpiryDate: Date = Date()
-    @State private var newName: String = ""
-    @State private var newItemQuantityUnit: FoodItemQuantityUnit = .boxess
-    // Bindings
-    @Binding var item: FoodItem
+    // MARK: TO DO - This needs to be fixed as it's currently not working
+
+    // View Model
+    @StateObject var foodItemViewModel: FoodItemViewModel
     // Others
     let numberFormatter = NumberFormatter.defaultFormatter
     // Environment variables
@@ -25,12 +22,12 @@ struct EditItemView: View {
     var body: some View {
         Form {
             Section(header: Text("Name")) {
-                TextField("", text: $newName)
+                TextField("", text: $foodItemViewModel.draft.name)
             }
 
             Section(header: Text("Quantity")) {
 
-                DoubleField("Item quantity", value: $newItemQuantity, formatter: numberFormatter)
+                TextField("Item quantity", value: $foodItemViewModel.draft.quantity, formatter: numberFormatter)
                         .keyboardType(.numberPad)
                 // MARK: TO DO - Fix the quantity stepper
 /*
@@ -39,40 +36,28 @@ struct EditItemView: View {
                         .keyboardType(.numberPad)
                 }
                  */
-                Picker(selection: $newItemQuantityUnit, label: Text("Quantity unit")) {
-                    ForEach(FoodItemQuantityUnit.allCases.sorted(by: {$0.rawValue < $1.rawValue}), id:\.rawValue) { unitCase in
-                        Text(unitCase.rawValue).tag(unitCase)
+                Picker(selection: $foodItemViewModel.draft.quantityUnit, label: Text("What is the unit?")) {
+                    ForEach(FoodItemStruct.quantityUnits.sorted(by: { $0.1 < $1.1 }), id:\.key) { key, value in
+                        Text(value)
                     }
                 }
             }
             
 
             Section(header: Text("Expiry Date")) {
-                DatePicker("Expiry Date", selection: $newExpiryDate, displayedComponents: [.date])
+                DatePicker("Expiry Date", selection: $foodItemViewModel.draft.expiryDate, displayedComponents: [.date])
                 
             }
 
-        }
-        .onAppear {
-            // MARK: TO DO - maybe do this on an init
-            newItemQuantity = item.quantity
-            newExpiryDate = item.expiryDate!
-            newName = item.name!
-            newItemQuantityUnit = item.quantityUnit
-            
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button("Done") {
-                    item.quantity = newItemQuantity
-                    item.quantityUnit = newItemQuantityUnit
-                    item.expiryDate = newExpiryDate
-                    item.name = newName
-                    try? database.save()
+                    foodItemViewModel.modifyItem()
                      editMode?.animation().wrappedValue = .inactive
                  }
-                .disabled(newName.isEmpty || newItemQuantity.isZero)
+                .disabled(foodItemViewModel.draft.cannotBeSaved)
             }
             ToolbarItemGroup(placement: .navigationBarLeading) {
                 Button("Cancel") {
@@ -83,10 +68,11 @@ struct EditItemView: View {
     }
 }
 
+/*
 struct EditItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let sampleData = FoodItem(name: "Eggs", expiryDate: Date())
+        let sampleData = FoodItemStruct(from: FoodItem(name: "Eggs", expiryDate: Date()))
         EditItemView(item: .constant(sampleData))
     }
 }
-
+*/

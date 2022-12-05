@@ -12,55 +12,28 @@ import Combine
 @available(iOS 15.0, *)
 struct ItemListView: View {
     // State variables
-    @State var itemsStorage: FoodStorage?
+    @State var itemsStorage: FoodStorageStruct?
     @State private var showingAddItemView: Bool = false
     @State private var showingSortSheet: Bool = false
-    @State var refresh: Bool = false
-    @State private var sortOrder: ((FoodItem, FoodItem) -> Bool) = { item1, item2 in
-        item1.name! < item2.name!
+    @State private var sortOrder: ((FoodItemStruct, FoodItemStruct) -> Bool) = { item1, item2 in
+        item1.name < item2.name
     }
-    // View model
-    @ObservedObject var viewModel: PantryManagerViewModel
     // Environment variables
-    @Environment(\.managedObjectContext) private var database
+    @EnvironmentObject private var dataManager: DataManager
     // Fetch request to fecth items from database
-    @FetchRequest(
-        sortDescriptors: [ SortDescriptor(\.name)]
-        // predicate: NSPredicate(format: "storage != nil AND storage.name == %@", "Fridge")
-    ) var items: FetchedResults<FoodItem>
-    /*
-    init(itemsStorage: FoodStorage?, viewModel: PantryManagerViewModel) {
-        if let itemsStorage = itemsStorage {
-            _itemsStorage = State(wrappedValue: itemsStorage)
-            _viewModel = ObservedObject(wrappedValue: viewModel)
-            let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
-            request.predicate = NSPredicate(format: "storage != nil AND storage.id == %@", itemsStorage.id!.uuidString)
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-            _items = FetchRequest(fetchRequest: request)
-        } else {
-            _viewModel = ObservedObject(wrappedValue: viewModel)
-            let request = NSFetchRequest<FoodItem>(entityName: "FoodItem")
-            request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
-            _items = FetchRequest(fetchRequest: request)
-        }
- 
-    }
-    */
+    var items: [FoodItemStruct] { dataManager.foodItemStructs }
+    
     var body: some View {
         Group {
             if items.filter(filterStorage).count != 0 {
                 List {
-                    ForEach(items.sorted(by: sortOrder).filter(filterStorage)) { item in
-                           
-                        NavigationLink(destination: ItemView(item: item, viewModel: viewModel)) {
-                                Text(item.name ?? "No item")
+                    ForEach(items.sorted(by: sortOrder).filter(filterStorage), id:\.self) { item in
+                        NavigationLink(destination: ItemView(item: item)) {
+                                ItemRowView(foodItem: item)
                             }
+                         
                     }
-                    .onDelete { indexSet in
-                        indexSet.map { items[$0] }.forEach { item in
-                            viewModel.deleteItem(item, from: database)
-                        }
-                    }
+
 
                 }
             } else {
@@ -71,9 +44,7 @@ struct ItemListView: View {
             }
         }
                 .sheet(isPresented: $showingAddItemView) {
-                    // MARK: TO DO - Send the storage as an optional
-                    AddItemView(itemStorage: itemsStorage!, viewModel: viewModel)
-                        .environment(\.managedObjectContext, database)
+                    AddItemView(newItemStorage: itemsStorage, foodItemViewModel: dataManager.foodItemViewModel(foodItemStruct: FoodItemStruct.empty))
                         .onDisappear {
                             
                         }
@@ -82,21 +53,10 @@ struct ItemListView: View {
                 .actionSheet(isPresented: $showingSortSheet) {
                     ActionSheet(
                         title: Text("Change sort order"),
-                        buttons: FoodItem.sortOrders.keys.sorted().map { key in
+                        buttons: FoodItemStruct.sortOrders.keys.sorted().map { key in
                                 .default(Text(key), action: { changeSortOrder(to: key) })
                         } + [.cancel(Text("Dismiss"))]
                     )}
-        /*
-                .actionSheet(isPresented: $showingSortSheet) {
-                    ActionSheet(
-                        title: Text("Change sort order"),
-                        buttons: [
-                            .default(Text("Name ascending"), action: { changeSortOrder(to: "alphabetical ascending") }),
-                            .default(Text("Name descending"), action: { changeSortOrder(to: "alphabetical descending") }),
-                            .cancel(Text("Dismiss"))
-                        ])
-                    }
-         */
             .navigationTitle(itemsStorage?.name ?? "All items")
                 .toolbar {
                     ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -116,12 +76,12 @@ struct ItemListView: View {
     }
     func changeSortOrder(to order: String) {
         withAnimation {
-            sortOrder = FoodItem.sortOrders[order]!
+            sortOrder = FoodItemStruct.sortOrders[order]!
         }
     }
-    func filterStorage(_ item: FoodItem) -> Bool {
+    func filterStorage(_ item: FoodItemStruct) -> Bool {
         if let itemsStorage = itemsStorage {
-            return item.storage!.id == itemsStorage.id
+            return item.storageID == itemsStorage.id
         }
         else {
             return true
@@ -129,16 +89,18 @@ struct ItemListView: View {
     }
 }
 
-
+/*
 struct ItemListView_Previews: PreviewProvider {
     
-    static let foodStorage = FoodStorage(name: "Storage", items: [FoodItem(name: "EEE"), FoodItem(name: "Item2")])
+    
+    static let database = PersistenceController.shared.container.viewContext
+    
     
     static var previews: some View {
-        let database = PersistenceController.preview.container.viewContext
-        ItemListView(itemsStorage: foodStorage, viewModel: PantryManagerViewModel())
+        let foodStorage = FoodStorageStruct(from: FoodStorage(name: "Storage", items: [FoodItem(name: "Eggs"), FoodItem(name: "Items")]))
+        ItemListView(itemsStorage: foodStorage)
             .environment(\.managedObjectContext, database)
     }
 }
-
+*/
 

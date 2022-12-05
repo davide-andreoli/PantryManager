@@ -10,66 +10,65 @@ import Combine
 
 struct AddItemView: View {
     // State variables
-    @State var newItemStorage: FoodStorage
-    @State private var newItemName = ""
-    @State private var newItemExpiryDate = Date()
-    @State private var newItemQuantity: Double = 1
-    @State private var newItemQuantityUnit: FoodItemQuantityUnit = .boxess
+    @State var newItemStorage: FoodStorageStruct?
     // Others
     let numberFormatter = NumberFormatter.defaultFormatter
+    var storages: [FoodStorageStruct] { dataManager.foodStoragesStructs }
     // View Model
-    @ObservedObject var viewModel: PantryManagerViewModel
+    @StateObject var foodItemViewModel: FoodItemViewModel
     //Environment variables
-    @Environment(\.managedObjectContext) private var database
     @Environment(\.presentationMode) var presentationMode
-    // Fetch request to fetch all storages
-    @FetchRequest var storages: FetchedResults<FoodStorage>
+    @EnvironmentObject private var dataManager: DataManager
+
+
     
-    //Custom initializer, necessary to initialize the storages request
-    init(itemStorage: FoodStorage, viewModel: PantryManagerViewModel) {
-        _newItemStorage = State(wrappedValue: itemStorage)
-        _viewModel = ObservedObject(wrappedValue: viewModel)
-        _storages = FetchRequest(fetchRequest: FoodStorage.fetchRequest(.all))
-    }
 //    MARK: UI/UX - Is it better to delete the sections?
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text("Storage")) {
+                    Section(header: Text("Storage")) {
 
-                    Picker(selection: $newItemStorage, label: Text("Storage")) {
-                        ForEach(storages.sorted(), id:\.self) { storage in
-                            Text(storage.name!)
+                        Picker(selection: $foodItemViewModel.draft.storageID, label: Text("Storage")) {
+                            ForEach(storages, id:\.self) { storage in
+                                Text(storage.name).tag(storage.id)
+                            }
+                        }
+                        .onAppear {
+                            foodItemViewModel.draft.storageID = storages.first!.id
                         }
                     }
-                }
+
                 Section(header: Text("Name")) {
-                    TextField("Item name", text: $newItemName)
+                    TextField("Item name", text: $foodItemViewModel.draft.name)
                 }
                 Section(header: Text("Quantity")) {
-                    DoubleField("Item quantity", value: $newItemQuantity, formatter: numberFormatter)
-                    Picker(selection: $newItemQuantityUnit, label: Text("What is the unit?")) {
-                        ForEach(FoodItemQuantityUnit.allCases.sorted(by: {$0.rawValue < $1.rawValue}), id:\.rawValue) { unitCase in
-                            Text(unitCase.rawValue).tag(unitCase)
+                    StepperField(stepperValue: $foodItemViewModel.draft.quantity)
+                    //DoubleField("Item quantity", value: $foodItemViewModel.draft.quantity, formatter: numberFormatter)
+                    //TextField("Item quantity", text: $foodItemViewModel.draft.quantity)
+                    Picker(selection: $foodItemViewModel.draft.quantityUnit, label: Text("What is the unit?")) {
+                        ForEach(FoodItemStruct.quantityUnits.sorted(by: { $0.1 < $1.1 }), id:\.key) { key, value in
+                            Text(value).tag(value)
                         }
                     }
+
                 }
                 Section(header: Text("Expiry Date")) {
-                    DatePicker("Expiry Date", selection: $newItemExpiryDate, displayedComponents: [.date])
+                    DatePicker("Expiry Date", selection: $foodItemViewModel.draft.expiryDate, displayedComponents: [.date])
                 }
             }
-            .navigationTitle("Add Item")
+            .navigationTitle("Add item to " + (newItemStorage?.name ?? "a storage"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     Button(action: {
-                        viewModel.addItem(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, storage: newItemStorage, in: database)
+                        foodItemViewModel.addNewItem()
+                       // viewModel.addItem(name: newItemName, expiryDate: newItemExpiryDate, quantity: newItemQuantity, quantityUnit: newItemQuantityUnit, storage: newItemStorage!, in: database)
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Add")
                     }
-                    .disabled(newItemName.isEmpty || newItemQuantity == 0)
+                    .disabled(foodItemViewModel.draft.cannotBeSaved)
                 }
                 ToolbarItemGroup(placement: .navigationBarLeading) {
                     Button(action: {
@@ -78,15 +77,18 @@ struct AddItemView: View {
                         Text("Cancel")
                     }
                 }
+
             }
         }
     }
 }
 
+/*
+
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        let foodStorage = FoodStorage(name: "Storage")
-        AddItemView(itemStorage: foodStorage, viewModel: PantryManagerViewModel())
+        let foodStorage = FoodStorageStruct(from: FoodStorage(name: "Storage"))
+        AddItemView(newItemStorage: foodStorage, viewModel: PantryManagerViewModel())
     }
 }
-
+*/

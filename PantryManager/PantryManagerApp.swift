@@ -10,8 +10,8 @@ import CoreData
 
 @main
 struct PantryManagerApp: App {
+    @StateObject var dataManager = DataManager()
     let viewModel = PantryManagerViewModel()
-    let persistenceController = PersistenceController.shared
     
     var body: some Scene {
         WindowGroup {
@@ -24,53 +24,58 @@ struct PantryManagerApp: App {
                     .tabItem {
                         Label("Categories", systemImage: "dial.min")
                     }.tag(2)
-                Text("Tab Content 2")
+                SettingsView()
                     .tabItem {
                         Label("Settings", systemImage: "gear")
                     }.tag(3)
             }
-            .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            .environmentObject(dataManager)
+            
             .onAppear {
-                initializeData()
+               initializeData()
             }
         }
     }
     
     func initializeData() {
+        // MARK: TO DO - Rewrite this
+        /*
+        dataManager.managedObjectContext.reset()
         // Clear the database --> will have to implement the app filling only at first launch
         var fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "FoodStorage")
         var deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        try! persistenceController.container.viewContext.execute(deleteRequest)
+        try! dataManager.managedObjectContext.execute(deleteRequest)
         fetchRequest = NSFetchRequest(entityName: "FoodItem")
         deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-        try! persistenceController.container.viewContext.execute(deleteRequest)
+        try! dataManager.managedObjectContext.execute(deleteRequest)
         
-        let foodStorage = FoodStorage(context: persistenceController.container.viewContext)
+        let foodStorage = FoodStorage(context: dataManager.managedObjectContext)
         foodStorage.name = "Pantry"
         foodStorage.id = UUID()
+        foodStorage.iconName = "bag.fill"
         
-        let foodStorage2 = FoodStorage(context: persistenceController.container.viewContext)
+        let foodStorage2 = FoodStorage(context: dataManager.managedObjectContext)
         foodStorage2.name = "Fridge"
         foodStorage2.id = UUID()
+        foodStorage.iconName = "snowflake"
         
-        let foodItem = FoodItem(context: persistenceController.container.viewContext)
+        let foodItem = FoodItem(context: dataManager.managedObjectContext)
         foodItem.name = "Eggs"
         foodItem.id = UUID()
         foodItem.quantity = 1
         foodItem.expiryDate = Date()
         foodItem.storage = foodStorage
         
-        let foodItem2 = FoodItem(context: persistenceController.container.viewContext)
+        let foodItem2 = FoodItem(context: dataManager.managedObjectContext)
         foodItem2.name = "Milk"
         foodItem2.id = UUID()
         foodItem2.quantity = 1
         foodItem2.expiryDate = Date()
         foodItem2.storage = foodStorage2
         
-        try? persistenceController.container.viewContext.save()
-        
-        persistenceController.container.viewContext.refreshAllObjects()
-        
+        try? dataManager.managedObjectContext.save()
+        */
    
     }
+
 }

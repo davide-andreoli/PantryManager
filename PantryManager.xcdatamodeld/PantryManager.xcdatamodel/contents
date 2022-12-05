@@ -5,10 +5,11 @@
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="Eggs"/>
         <attribute name="quantity" attributeType="Double" defaultValueString="1" usesScalarValueType="YES"/>
-        <attribute name="quantityUnitString" optional="YES" attributeType="String"/>
+        <attribute name="quantityUnit" optional="YES" attributeType="String"/>
         <relationship name="storage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FoodStorage" inverseName="items" inverseEntity="FoodStorage"/>
     </entity>
     <entity name="FoodStorage" representedClassName="FoodStorage" syncable="YES" codeGenerationType="class">
+        <attribute name="iconName" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String" defaultValueString="Storage"/>
         <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FoodItem" inverseName="storage" inverseEntity="FoodItem"/>

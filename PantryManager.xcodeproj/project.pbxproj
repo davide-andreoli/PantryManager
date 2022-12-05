@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9518B22D26525D3E004528FC /* DecimalField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518B22C26525D3E004528FC /* DecimalField.swift */; };
-		9518B22F2652671F004528FC /* DoubleField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518B22E2652671F004528FC /* DoubleField.swift */; };
 		9518B2332652A8A5004528FC /* NumberFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518B2322652A8A5004528FC /* NumberFormatter+Extensions.swift */; };
-		9518B2392653A2CD004528FC /* AllItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518B2382653A2CD004528FC /* AllItemsView.swift */; };
 		9518B23B2653A3BD004528FC /* CollectiveButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9518B23A2653A3BD004528FC /* CollectiveButtonView.swift */; };
 		954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */; };
 		954B7B722626CCDE003A9656 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954B7B712626CCDE003A9656 /* ItemView.swift */; };
@@ -22,20 +19,25 @@
 		95725DA126261DE500F7DABC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95725DA026261DE500F7DABC /* Preview Assets.xcassets */; };
 		958E5C4B2629E00400E45C8B /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E5C4A2629E00400E45C8B /* Array+Extensions.swift */; };
 		9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 95544FEA2629975A00529DF3 /* PantryManager.xcdatamodeld */; };
-		95A80A4A27F993B20032A920 /* CreateStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A80A4927F993B20032A920 /* CreateStorageView.swift */; };
-		95A94B3C2651677A0019AAAA /* FoodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3B2651677A0019AAAA /* FoodItem.swift */; };
-		95A94B3E2651679B0019AAAA /* FoodStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3D2651679B0019AAAA /* FoodStorage.swift */; };
+		95A80A4A27F993B20032A920 /* AddStorageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A80A4927F993B20032A920 /* AddStorageView.swift */; };
 		95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */; };
-		95B8D313292C179600272E23 /* FoodItemQuantityUnits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D312292C179600272E23 /* FoodItemQuantityUnits.swift */; };
+		95B8D31929326ECC00272E23 /* ItemRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D31829326ECC00272E23 /* ItemRowView.swift */; };
+		95B8D31B2932737C00272E23 /* DateFormatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D31A2932737C00272E23 /* DateFormatter+Extensions.swift */; };
+		95B8D31D29367A8C00272E23 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D31C29367A8B00272E23 /* DataManager.swift */; };
+		95B8D31F29367BFA00272E23 /* PersistentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D31E29367BFA00272E23 /* PersistentStore.swift */; };
+		95B8D32129378AB700272E23 /* FoodItemStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D32029378AB700272E23 /* FoodItemStruct.swift */; };
+		95B8D32329378D6500272E23 /* FoodStorageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D32229378D6500272E23 /* FoodStorageStruct.swift */; };
+		95B8D3252937E9D500272E23 /* FoodItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D3242937E9D500272E23 /* FoodItemViewModel.swift */; };
+		95B8D3272937EDED00272E23 /* NSManagedObject+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D3262937EDED00272E23 /* NSManagedObject+Extensions.swift */; };
+		95B8D3292938061D00272E23 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D3282938061D00272E23 /* SettingsView.swift */; };
+		95B8D32B2938087500272E23 /* FoodStorageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D32A2938087500272E23 /* FoodStorageViewModel.swift */; };
+		95B8D32D293BBAED00272E23 /* StepperField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B8D32C293BBAED00272E23 /* StepperField.swift */; };
 		95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A742626EBCA00EF954B /* AddItemView.swift */; };
 		95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95CF6A7D2627410600EF954B /* EditItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9518B22C26525D3E004528FC /* DecimalField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecimalField.swift; sourceTree = "<group>"; };
-		9518B22E2652671F004528FC /* DoubleField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleField.swift; sourceTree = "<group>"; };
 		9518B2322652A8A5004528FC /* NumberFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NumberFormatter+Extensions.swift"; sourceTree = "<group>"; };
-		9518B2382653A2CD004528FC /* AllItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllItemsView.swift; sourceTree = "<group>"; };
 		9518B23A2653A3BD004528FC /* CollectiveButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectiveButtonView.swift; sourceTree = "<group>"; };
 		954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryManagerViewModel.swift; sourceTree = "<group>"; };
 		954B7B712626CCDE003A9656 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
@@ -49,11 +51,19 @@
 		95725DA026261DE500F7DABC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		95725DA226261DE500F7DABC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		958E5C4A2629E00400E45C8B /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
-		95A80A4927F993B20032A920 /* CreateStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateStorageView.swift; sourceTree = "<group>"; };
-		95A94B3B2651677A0019AAAA /* FoodItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItem.swift; sourceTree = "<group>"; };
-		95A94B3D2651679B0019AAAA /* FoodStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorage.swift; sourceTree = "<group>"; };
+		95A80A4927F993B20032A920 /* AddStorageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStorageView.swift; sourceTree = "<group>"; };
 		95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSPredicate+Extensions.swift"; sourceTree = "<group>"; };
-		95B8D312292C179600272E23 /* FoodItemQuantityUnits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemQuantityUnits.swift; sourceTree = "<group>"; };
+		95B8D31829326ECC00272E23 /* ItemRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRowView.swift; sourceTree = "<group>"; };
+		95B8D31A2932737C00272E23 /* DateFormatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extensions.swift"; sourceTree = "<group>"; };
+		95B8D31C29367A8B00272E23 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		95B8D31E29367BFA00272E23 /* PersistentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentStore.swift; sourceTree = "<group>"; };
+		95B8D32029378AB700272E23 /* FoodItemStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemStruct.swift; sourceTree = "<group>"; };
+		95B8D32229378D6500272E23 /* FoodStorageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorageStruct.swift; sourceTree = "<group>"; };
+		95B8D3242937E9D500272E23 /* FoodItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItemViewModel.swift; sourceTree = "<group>"; };
+		95B8D3262937EDED00272E23 /* NSManagedObject+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObject+Extensions.swift"; sourceTree = "<group>"; };
+		95B8D3282938061D00272E23 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		95B8D32A2938087500272E23 /* FoodStorageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorageViewModel.swift; sourceTree = "<group>"; };
+		95B8D32C293BBAED00272E23 /* StepperField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperField.swift; sourceTree = "<group>"; };
 		95CF6A742626EBCA00EF954B /* AddItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddItemView.swift; sourceTree = "<group>"; };
 		95CF6A772627082200EF954B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		95CF6A7D2627410600EF954B /* EditItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditItemView.swift; sourceTree = "<group>"; };
@@ -73,8 +83,7 @@
 		9518B23D2653EEC6004528FC /* Utility Views */ = {
 			isa = PBXGroup;
 			children = (
-				9518B22C26525D3E004528FC /* DecimalField.swift */,
-				9518B22E2652671F004528FC /* DoubleField.swift */,
+				95B8D32C293BBAED00272E23 /* StepperField.swift */,
 			);
 			path = "Utility Views";
 			sourceTree = "<group>";
@@ -90,13 +99,14 @@
 			isa = PBXGroup;
 			children = (
 				95CF6A742626EBCA00EF954B /* AddItemView.swift */,
+				95A80A4927F993B20032A920 /* AddStorageView.swift */,
 				954B7B712626CCDE003A9656 /* ItemView.swift */,
 				95CF6A7D2627410600EF954B /* EditItemView.swift */,
 				95544F952628CA7200529DF3 /* ItemListView.swift */,
+				95B8D31829326ECC00272E23 /* ItemRowView.swift */,
 				95544F982628D36F00529DF3 /* StoragesListView.swift */,
-				95A80A4927F993B20032A920 /* CreateStorageView.swift */,
 				9518B23A2653A3BD004528FC /* CollectiveButtonView.swift */,
-				9518B2382653A2CD004528FC /* AllItemsView.swift */,
+				95B8D3282938061D00272E23 /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -105,6 +115,10 @@
 			isa = PBXGroup;
 			children = (
 				954B7B6E2626C643003A9656 /* PantryManagerViewModel.swift */,
+				95B8D31C29367A8B00272E23 /* DataManager.swift */,
+				95B8D31E29367BFA00272E23 /* PersistentStore.swift */,
+				95B8D3242937E9D500272E23 /* FoodItemViewModel.swift */,
+				95B8D32A2938087500272E23 /* FoodStorageViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -156,7 +170,8 @@
 		95725DA92626208200F7DABC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				95B8D312292C179600272E23 /* FoodItemQuantityUnits.swift */,
+				95B8D32029378AB700272E23 /* FoodItemStruct.swift */,
+				95B8D32229378D6500272E23 /* FoodStorageStruct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -165,10 +180,10 @@
 			isa = PBXGroup;
 			children = (
 				958E5C4A2629E00400E45C8B /* Array+Extensions.swift */,
-				95A94B3B2651677A0019AAAA /* FoodItem.swift */,
-				95A94B3D2651679B0019AAAA /* FoodStorage.swift */,
 				95A94B3F265174B00019AAAA /* NSPredicate+Extensions.swift */,
 				9518B2322652A8A5004528FC /* NumberFormatter+Extensions.swift */,
+				95B8D31A2932737C00272E23 /* DateFormatter+Extensions.swift */,
+				95B8D3262937EDED00272E23 /* NSManagedObject+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,26 +257,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95B8D32329378D6500272E23 /* FoodStorageStruct.swift in Sources */,
 				95544FF0262997ED00529DF3 /* Persistence.swift in Sources */,
 				954B7B6F2626C643003A9656 /* PantryManagerViewModel.swift in Sources */,
-				9518B22D26525D3E004528FC /* DecimalField.swift in Sources */,
+				95B8D31B2932737C00272E23 /* DateFormatter+Extensions.swift in Sources */,
+				95B8D3272937EDED00272E23 /* NSManagedObject+Extensions.swift in Sources */,
+				95B8D32B2938087500272E23 /* FoodStorageViewModel.swift in Sources */,
 				9590831B26299F1B0073D339 /* PantryManager.xcdatamodeld in Sources */,
-				95A94B3E2651679B0019AAAA /* FoodStorage.swift in Sources */,
+				95B8D32D293BBAED00272E23 /* StepperField.swift in Sources */,
 				954B7B722626CCDE003A9656 /* ItemView.swift in Sources */,
 				9518B23B2653A3BD004528FC /* CollectiveButtonView.swift in Sources */,
 				95CF6A752626EBCA00EF954B /* AddItemView.swift in Sources */,
-				9518B22F2652671F004528FC /* DoubleField.swift in Sources */,
 				9518B2332652A8A5004528FC /* NumberFormatter+Extensions.swift in Sources */,
 				95544F992628D36F00529DF3 /* StoragesListView.swift in Sources */,
 				95544F962628CA7200529DF3 /* ItemListView.swift in Sources */,
 				958E5C4B2629E00400E45C8B /* Array+Extensions.swift in Sources */,
-				95A94B3C2651677A0019AAAA /* FoodItem.swift in Sources */,
+				95B8D31929326ECC00272E23 /* ItemRowView.swift in Sources */,
 				95CF6A7E2627410600EF954B /* EditItemView.swift in Sources */,
 				95725D9A26261DE300F7DABC /* PantryManagerApp.swift in Sources */,
 				95A94B40265174B00019AAAA /* NSPredicate+Extensions.swift in Sources */,
-				95B8D313292C179600272E23 /* FoodItemQuantityUnits.swift in Sources */,
-				9518B2392653A2CD004528FC /* AllItemsView.swift in Sources */,
-				95A80A4A27F993B20032A920 /* CreateStorageView.swift in Sources */,
+				95B8D3292938061D00272E23 /* SettingsView.swift in Sources */,
+				95B8D32129378AB700272E23 /* FoodItemStruct.swift in Sources */,
+				95B8D31F29367BFA00272E23 /* PersistentStore.swift in Sources */,
+				95B8D31D29367A8C00272E23 /* DataManager.swift in Sources */,
+				95A80A4A27F993B20032A920 /* AddStorageView.swift in Sources */,
+				95B8D3252937E9D500272E23 /* FoodItemViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
